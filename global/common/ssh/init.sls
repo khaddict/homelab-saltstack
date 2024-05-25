@@ -5,7 +5,7 @@ ssh_pkg:
 sshd_config:
   file.managed:
     - name: /etc/ssh/sshd_config
-    - source: salt://common/ssh/files/sshd_config
+    - source: salt://global/common/ssh/files/sshd_config
     - mode: 644
     - user: root
     - group: root
