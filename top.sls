@@ -1,4 +1,5 @@
 # All hosts configuration
+base:
   '*':
     - global
 

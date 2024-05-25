@@ -1,12 +1,12 @@
 minion-config:
   file.managed:
     - name: /etc/salt/minion
-    - source: salt://global/common/salt-minion/minion
+    - source: salt://global/common/salt-minion/files/minion
 
 gpg-pubkey:
   file.managed:
     - name: /etc/apt/keyrings/salt-archive-keyring-2023.gpg
-    - source: salt://global/common/salt-minion/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+    - source: salt://global/common/salt-minion/files/SALT-PROJECT-GPG-PUBKEY-2023.gpg
 
 salt_repo_pkg:
   pkgrepo.managed:
@@ -16,7 +16,7 @@ salt_repo_pkg:
 
 install_salt-minion:
   pkg.installed:
-    - pkgs: salt-minion
+    - name: salt-minion
 
 service_salt-minion:
   service.running:
