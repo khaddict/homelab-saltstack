@@ -1,2 +1,3 @@
 include:
   - .packages
+  - .salt-minion
