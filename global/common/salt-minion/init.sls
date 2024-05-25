@@ -16,7 +16,7 @@ gpg-pubkey:
 
 salt_repo_pkg:
   pkgrepo.managed:
-    - name: deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main
+    - name: deb [arch=amd64 signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main
     - dist: bookworm
     - file: /etc/apt/sources.list.d/salt.list
     - mode: 644
