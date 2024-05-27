@@ -10,11 +10,6 @@ sshd_config:
     - user: root
     - group: root
 
-service_sshd:
-  service.running:
-    - name: sshd
-    - enable: True
-
 authorized_keys-file:
   file.managed:
     - name: /root/.ssh/authorized_keys
@@ -22,3 +17,9 @@ authorized_keys-file:
     - mode: 600
     - user: root
     - group: root
+
+service_ssh:
+  service.running:
+    - name: ssh
+    - enable: True
+    - reload: True
