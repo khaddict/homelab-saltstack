@@ -1,0 +1,12 @@
+---
+name: deploy_vm
+pack: st2_homelab
+description: Deploy a new VM.
+runner_type: orquesta
+entry_point: workflows/deploy_vm.yaml
+enabled: true
+parameters:
+  hostname:
+    required: true
+    type: string
+    description: Server hostname.

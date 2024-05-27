@@ -1,0 +1,12 @@
+version 1.0
+description: Deploy a new VM.
+
+input: 
+  - hostname
+
+tasks:
+  echo_hostname:
+    action: core.local
+    input:
+      cmd: |
+        echo <% ctx().hostname %>
