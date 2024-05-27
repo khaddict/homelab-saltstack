@@ -18,6 +18,14 @@ authorized_keys-file:
     - user: root
     - group: root
 
+config-file:
+  file.managed:
+    - name: /root/.ssh/config
+    - source: salt://global/common/ssh/files/config
+    - mode: 644
+    - user: root
+    - group: root
+
 service_ssh:
   service.running:
     - name: ssh

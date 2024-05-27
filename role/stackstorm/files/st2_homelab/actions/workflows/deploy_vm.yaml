@@ -1,4 +1,4 @@
-version 1.0
+version: 1.0
 description: Deploy a new VM.
 
 input: 
@@ -9,4 +9,25 @@ tasks:
     action: core.local
     input:
       cmd: |
-        echo <% ctx().hostname %>
+        hostname
+    next:
+      - when: <% succeeded() %>
+        do: echo_remote_hostname
+        publish:
+          - var1: <% result().stdout %>
+  
+  echo_remote_hostname:
+    action: core.remote
+    input:
+      hosts: "saltmaster.homelab.lan"
+      username: root
+      cmd: |
+        hostname
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - var2: <% result().stdout %>
+
+output:
+  - var1: <% ctx().var1 %>
+  - var2: <% ctx().var2 %>
