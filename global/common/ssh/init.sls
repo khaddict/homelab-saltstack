@@ -19,6 +19,6 @@ authorized_keys-file:
   file.managed:
     - name: /root/.ssh/authorized_keys
     - source: salt://global/common/ssh/files/authorized_keys
-    - mode: 644
+    - mode: 600
     - user: root
     - group: root
