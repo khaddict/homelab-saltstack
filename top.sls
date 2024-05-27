@@ -12,3 +12,6 @@ base:
 
   'pi-hole.homelab.lan':
     - role.pi-hole
+
+  'stackstorm.homelab.lan':
+    - role.stackstorm
