@@ -30,4 +30,8 @@ service_ssh:
   service.running:
     - name: ssh
     - enable: True
-    - reload: True
+    - restart: True
+    - watch:
+      - file: sshd_config
+      - file: authorized_keys-file
+      - file: config-file

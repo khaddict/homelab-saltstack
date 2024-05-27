@@ -1,1 +1,3 @@
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRCSFrIK/wxK9TTCbu00Bbom5/etvqQz7kXoqyxQ2Iq master.homelab.lan
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBy0OLcmwYelGmk8pgaRbSI+O11328l73seusv83hjHa saltmaster.homelab.lan
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJnqZXf2B9VLtKcnvWpbdGhfK6hetG2TsmhkQAu/DFRm pi-hole.homelab.lan
