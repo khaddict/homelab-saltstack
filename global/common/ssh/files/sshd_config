@@ -5,4 +5,3 @@ PasswordAuthentication              yes
 PubkeyAuthentication                yes
 AuthorizedKeysFile                  /root/.ssh/authorized_keys
 UsePAM                              yes
-AuthenticationMethods               publickey,password
