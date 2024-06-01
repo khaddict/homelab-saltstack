@@ -1,6 +1,9 @@
 192.168.0.109 tp-link.homelab.lan
-192.168.0.110 proxmox.homelab.lan
-192.168.0.111 pi-hole.homelab.lan
-192.168.0.112 saltmaster.homelab.lan
-192.168.0.113 master.homelab.lan
-192.168.0.114 stackstorm.homelab.lan
+192.168.0.200 n1-cls1.homelab.lan
+192.168.0.201 n2-cls1.homelab.lan
+192.168.0.202 n3-cls1.homelab.lan
+192.168.0.203 pi-hole01.homelab.lan
+192.168.0.204 pi-hole02.homelab.lan
+192.168.0.205 saltmaster.homelab.lan
+192.168.0.206 main.homelab.lan
+192.168.0.207 stackstorm.homelab.lan
