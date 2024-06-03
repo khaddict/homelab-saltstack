@@ -21,7 +21,7 @@ bashrc-file:
 {{ fqdn }}-network-conf:
   file.managed:
     - name: /etc/network/interfaces
-    {% if fqdn == 'n1-cls1.homelab.lan' %}
+    {% if fqdn is match('n\d-cls\d\.homelab\.lan') %}
     - source: salt://global/common/files/network-conf-proxmox
     {% else %}
     - source: salt://global/common/files/network-conf
