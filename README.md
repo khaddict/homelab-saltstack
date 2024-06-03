@@ -1,20 +1,41 @@
-# homelab
+# Mon homelab
 
-L'objectif c'est de me faire un mini datacenter et de tester plein de trucs. Les idées que j'ai à l'heure où je commit :
+## Introduction
 
-En cours :
+L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de trucs.
 
-une machine master qui peut SSH les autres machines (et disable l'authentification SSH avec mot de passe)
-un saltmaster pour gérer les configurations de toutes les machines
-un pi-hole pour gérer la partie DNS + pubs dans mon réseau local. Possible d'ajouter les entrées DNS directement depuis /etc/pihole/custom.list
-une machine stackstorm pour gérer les automatisations
-une machine prometheus / alertmanager pour gérer le monitoring / alerting. Faire en sorte de rediriger ça vers un discord spécial alertes via webhooks ?
-un serveur web parce que c'est cool et un homelab sans site web c'est nul ?
-une machine CA qui gère les certificats SSL (openSSL)
-une machine Vault pour stocker les secrets qui sont récupérables via SaltStack
-une machine SMTP
-Ce qui sera fait :
+## Matériel
 
-la partie cloud pour apprendre à gérer avec k8s, docker (cloud.homelab.lan)
-la partie ansible (?)
-la partie terraform (?)
+- GEEKOM Mini IT13 Mini-PC Intel Core i9 upgrade à 64Go : https://www.geekom.fr/geekom-mini-it13-mini-pc/
+- Raspberry Pi 5 8GB x2 : https://www.raspberrypi.com/products/raspberry-pi-5/
+- TP-Link TL-SG108E Switch Ethernet 8 Ports Gigabit : https://www.amazon.fr/gp/product/B00JKB63D8
+
+### Fait
+
+- `master.homelab.lan` : machine "test" sur laquelle il est possible de faire un peu n'importe quoi (des curl, des boucles...) + git installé dessus pour gérer les repo GitHub
+- `saltmaster.homelab.lan` : saltmaster qui pilote ses minions → gestion de configurations
+- `pi-hole01.homelab.lan` : premier Pi-hole pour gérer la partie DNS + adblocker. Entrées DNS gérées directement via le fichier `/etc/pihole/custom.list`
+- `pi-hole02.homelab.lan` : deuxième Pi-hole
+- `stackstorm.homelab.lan` :  stackstorm permet de gérer les automatisations
+
+### En cours
+
+- `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
+- `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
+- `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
+- `web02.homelab.lan` : deuxième serveur web équivalent au premier
+- `hap01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web
+- `hap02.homelab.lan` : deuxième HAProxy + Keepalived
+
+### Après
+
+- `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
+- `vault.homelab.lan` : machine Vault pour stocker les secrets qui doivent être récupérables via SaltStack
+- `smtp.homelab.lan` : machine SMTP
+- `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
+- `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
+- `terraform.homelab.lan` : mettre en place une partie de l'automatisation avec Terraform pour apprendre les basiques
+
+### Axes de réflexion
+
+- Comment gérer au mieux la HA des Pi-hole ? Ils ne sont pas sur la même multiprise, possible de les laisser indépendants et réglages côté DHCP ou besoin d'utiliser Keepalived / HAProxy ? 
