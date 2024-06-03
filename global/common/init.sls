@@ -35,4 +35,4 @@ resolv-conf:
     - source: salt://global/common/files/resolv-conf
     - template: jinja
     - context:
-        dns_nameservers: {{ ' '.join(network_confs.dns_nameservers) }}
+        dns_nameservers: {{ network_confs.dns_nameservers }}
