@@ -1,9 +1,12 @@
+{% import_yaml 'data/network_configs.yaml' as network_configs %}
+{% set fqdn = grains["fqdn"] %}
+
 include:
   - .packages
   - .salt-minion
   - .ssh
 
-# .bashrc file
+# /root/.bashrc
 
 bashrc-file:
   file.managed:
@@ -12,3 +15,13 @@ bashrc-file:
     - mode: 644
     - user: root
     - group: root
+
+# /etc/network/interfaces
+
+{{ fqdn }}-network-config:
+  file.managed:
+    - name: /etc/network/interfaces
+    - source: salt://global/common/files/network-config
+    - template: jinja
+    - context:
+        ip: {{ network_configs.network_config.fqdn.ip }}
