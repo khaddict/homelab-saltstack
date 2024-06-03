@@ -21,7 +21,11 @@ bashrc-file:
 {{ fqdn }}-network-conf:
   file.managed:
     - name: /etc/network/interfaces
+    {% if fqdn == 'n1-cls1.homelab.lan' %}
+    - source: salt://global/common/files/network-conf-proxmox
+    {% else %}
     - source: salt://global/common/files/network-conf
+    {% endif %}
     - template: jinja
     - context:
         main_iface: {{ network_confs.network_conf[fqdn].main_iface }}
@@ -29,7 +33,7 @@ bashrc-file:
         netmask: {{ network_confs.network_conf[fqdn].netmask }}
         gateway: {{ network_confs.network_conf[fqdn].gateway }}
 
-resolv-conf:
+{{ fqdn }}-resolv-conf:
   file.managed:
     - name: /etc/resolv.conf
     - source: salt://global/common/files/resolv-conf
