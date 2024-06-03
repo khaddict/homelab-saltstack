@@ -11,12 +11,22 @@ minion-config:
     - user: root
     - group: root
 
+download_salt_gpg_key:
+  file.managed:
+    - name: /etc/apt/keyrings/salt-archive-keyring-2023.gpg
+    - source: https://repo.saltproject.io/salt/py3/{{ os }}/{{ osrelease }}/{{ osarch }}/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+    - makedirs: True
+    - user: root
+    - group: root
+    - mode: 644
+
 salt_repo_pkg:
   pkgrepo.managed:
     - name: deb [arch={{ osarch }} signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg] https://repo.saltproject.io/salt/py3/{{ os }}/{{ osrelease }}/{{ osarch }}/latest {{ oscodename }} main
     - dist: {{ oscodename }}
     - file: /etc/apt/sources.list.d/salt.list
-    - key_url: https://repo.saltproject.io/salt/py3/{{ os }}/{{ osrelease }}/{{ osarch }}/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+    - require:
+      - file: download_salt_gpg_key
 
 install_salt-minion:
   pkg.installed:
