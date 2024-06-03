@@ -21,7 +21,7 @@ bashrc-file:
 {{ fqdn }}-network-conf:
   file.managed:
     - name: /etc/network/interfaces
-    - source: salt://global/common/files/network-confs
+    - source: salt://global/common/files/network-conf
     - template: jinja
     - context:
         main_iface: {{ network_confs.network_conf[fqdn].main_iface }}
@@ -33,4 +33,6 @@ resolv-conf:
   file.managed:
     - name: /etc/resolv.conf
     - source: salt://global/common/files/resolv-conf
-        dns_nameservers: {{ ' '.join(network_configs.dns_nameservers) }}
+    - template: jinja
+    - context:
+        dns_nameservers: {{ ' '.join(network_confs.dns_nameservers) }}
