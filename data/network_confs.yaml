@@ -12,6 +12,6 @@ network_conf:
     gateway: "192.168.0.254"
   main.homelab.lan:
     main_iface: "ens18"
-    ip_addr: "192.168.0.206"
+    ip_addr: "192.168.0.220"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
