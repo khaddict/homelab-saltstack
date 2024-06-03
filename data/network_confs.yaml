@@ -15,3 +15,18 @@ network_conf:
     ip_addr: "192.168.0.206"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
+  n1-cls1.homelab.lan:
+    main_iface: "enp87s0"
+    ip_addr: "192.168.0.200"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
+  n2-cls1.homelab.lan:
+    main_iface: "eth0"
+    ip_addr: "192.168.0.201"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
+  n3-cls1.homelab.lan:
+    main_iface: "eth0"
+    ip_addr: "192.168.0.202"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
