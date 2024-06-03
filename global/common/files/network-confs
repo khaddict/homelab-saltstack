@@ -14,4 +14,3 @@ iface {{ main_iface }} inet static
 	address {{ ip_addr }}
 	netmask {{ netmask }}
 	gateway {{ gateway }}
-	dns-nameservers {{ dns_nameservers }}

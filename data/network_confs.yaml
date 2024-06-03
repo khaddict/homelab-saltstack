@@ -1,10 +1,12 @@
 ---
-network_config:
+dns_nameservers:
+  - "192.168.0.203"
+  - "192.168.0.204"
+  - "192.168.0.254"
+
+network_confs:
   saltmaster.homelab.lan:
     main_iface: "ens18"
     ip_addr: "192.168.0.205"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
-    dns_nameservers:
-      - "192.168.0.203"
-      - "192.168.0.204"

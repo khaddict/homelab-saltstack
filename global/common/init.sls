@@ -1,4 +1,4 @@
-{% import_yaml 'data/network_configs.yaml' as network_configs %}
+{% import_yaml 'data/network_confs.yaml' as network_confs %}
 {% set fqdn = grains["fqdn"] %}
 
 include:
@@ -18,14 +18,19 @@ bashrc-file:
 
 # /etc/network/interfaces
 
-{{ fqdn }}-network-config:
+{{ fqdn }}-network-conf:
   file.managed:
     - name: /etc/network/interfaces
-    - source: salt://global/common/files/network-config
+    - source: salt://global/common/files/network-confs
     - template: jinja
     - context:
-        main_iface: {{ network_configs.network_config[fqdn].main_iface }}
-        ip_addr: {{ network_configs.network_config[fqdn].ip_addr }}
-        netmask: {{ network_configs.network_config[fqdn].netmask }}
-        gateway: {{ network_configs.network_config[fqdn].gateway }}
-        dns_nameservers: {{ ' '.join(network_configs.network_config[fqdn].dns_nameservers) }}
+        main_iface: {{ network_confs.network_conf[fqdn].main_iface }}
+        ip_addr: {{ network_confs.network_conf[fqdn].ip_addr }}
+        netmask: {{ network_confs.network_conf[fqdn].netmask }}
+        gateway: {{ network_confs.network_conf[fqdn].gateway }}
+
+resolv-conf:
+  file.managed:
+    - name: /etc/resolv.conf
+    - source: salt://global/common/files/resolv-conf
+        dns_nameservers: {{ ' '.join(network_configs.dns_nameservers) }}
