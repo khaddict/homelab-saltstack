@@ -4,13 +4,16 @@ base:
     - global
 
 # Per role configuration
+  'n?-cls?.homelab.lan':
+    - role.proxmox
+
   'saltmaster.homelab.lan':
     - role.saltmaster
 
-  'master.homelab.lan':
-    - role.master
+  'main.homelab.lan':
+    - role.main
 
-  'pi-hole.homelab.lan':
+  'pi-hole??.homelab.lan':
     - role.pi-hole
 
   'stackstorm.homelab.lan':
