@@ -10,6 +10,11 @@ sshd_config:
     - user: root
     - group: root
 
+remove_symlink_if_present:
+  cmd.run:
+    - name: unlink /root/.ssh/authorized_keys
+    - onlyif: test -L /root/.ssh/authorized_keys
+
 authorized_keys-file:
   file.managed:
     - name: /root/.ssh/authorized_keys
@@ -17,6 +22,8 @@ authorized_keys-file:
     - mode: 600
     - user: root
     - group: root
+    - require:
+      - cmd: remove_symlink_if_present
 
 config-file:
   file.managed:
