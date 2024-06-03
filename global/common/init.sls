@@ -24,4 +24,8 @@ bashrc-file:
     - source: salt://global/common/files/network-config
     - template: jinja
     - context:
-        ip: {{ network_configs.network_config.fqdn.ip }}
+        main_iface: {{ network_configs.network_config[fqdn].main_iface }}
+        ip_addr: {{ network_configs.network_config[fqdn].ip_addr }}
+        netmask: {{ network_configs.network_config[fqdn].netmask }}
+        gateway: {{ network_configs.network_config[fqdn].gateway }}
+        dns_nameservers: {{ ' '.join(network_configs.network_config[fqdn].dns_nameservers) }}
