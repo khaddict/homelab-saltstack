@@ -19,6 +19,7 @@ download_salt_gpg_key:
     - user: root
     - group: root
     - mode: 644
+    - skip_verify: True
 
 salt_repo_pkg:
   pkgrepo.managed:
