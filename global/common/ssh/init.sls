@@ -37,7 +37,7 @@ service_ssh:
   service.running:
     - name: ssh
     - enable: True
-    - restart: True
+    - reload: True
     - watch:
       - file: sshd_config
       - file: authorized_keys-file

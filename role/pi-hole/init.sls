@@ -5,3 +5,11 @@ pi-hole-dns-entries-config:
     - mode: 644
     - user: root
     - group: root
+
+reload-pihole-service:
+  service.running:
+    - name: pihole-FTL
+    - enable: True
+    - reload: True
+    - watch:
+      - file: pi-hole-dns-entries-config
