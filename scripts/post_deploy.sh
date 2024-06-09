@@ -128,7 +128,7 @@ echo
 echo "--- MERGE REQUEST FOR GITHUB ---"
 echo
 SSH_PUBKEY=$(cat /root/.ssh/id_ed25519.pub)
-echo "→ salt:/homelab/common/ssh/files/authorized_keys ←"
+echo "→ salt:/homelab/global/common/ssh/files/authorized_keys ←"
 echo """
 $SSH_PUBKEY
 """
