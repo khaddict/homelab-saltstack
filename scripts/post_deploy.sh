@@ -96,7 +96,7 @@ echo $DONE_MSG
 echo
 
 echo "--- INSTALL SALT-MINION ---"
-apt install salt-minion
+apt install -y salt-minion
 echo $DONE_MSG
 
 echo
@@ -126,19 +126,24 @@ echo $DONE_MSG
 echo
 
 echo "--- MERGE REQUEST FOR GITHUB ---"
+echo
 SSH_PUBKEY=$(cat /root/.ssh/id_ed25519.pub)
-echo "--- salt:/homelab/common/ssh/files/authorized_keys ---"
-echo "$SSH_PUBKEY"
-echo "--- salt:/homelab/data/network_confs.yaml ---"
+echo "~ salt:/homelab/common/ssh/files/authorized_keys ~"
+echo """
+$SSH_PUBKEY
+"""
+echo "~ salt:/homelab/data/network_confs.yaml ~"
 echo """
 $HOSTNAME.$DOMAIN:
-main_iface: "$FIRST_INTERFACE"
-ip_addr: "$IP"
-netmask: "$NETMASK"
-gateway: "$GATEWAY"
+  main_iface: "$FIRST_INTERFACE"
+  ip_addr: "$IP"
+  netmask: "$NETMASK"
+  gateway: "$GATEWAY"
 """
-echo "--- salt:/homelab/role/pi-hole/files/custom.list ---"
-echo "$IP $HOSTNAME.$DOMAIN"
+echo "~ salt:/homelab/role/pi-hole/files/custom.list ~"
+echo """
+$IP $HOSTNAME.$DOMAIN
+"""
 echo "If it's a new role, you also have to create salt:/homelab/role/<role_name>"
 
 echo
