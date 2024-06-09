@@ -105,7 +105,7 @@ tasks:
       username: root
       cmd: |
         pvesh create /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/status/start
-      next:
+    next:
       - when: <% failed() %>
         publish:
           - msg: "<% ctx().vm_name %> created but could not start the VM."
