@@ -1,2 +1,2 @@
 include:
-  - base.postgresql-16
+  - base.postgresql
