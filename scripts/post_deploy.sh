@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wget https://raw.githubusercontent.com/khaddict/homelab/main/scripts/post_deploy.sh && chmod +x post_deploy.sh && apt install -y dos2unix && dos2unix post_deploy.sh && ./post_deploy.sh
+# wget -P /tmp https://raw.githubusercontent.com/khaddict/homelab/main/scripts/post_deploy.sh && chmod +x /tmp/post_deploy.sh && apt install -y dos2unix && dos2unix /tmp/post_deploy.sh && /bin/bash /tmp/post_deploy.sh
 
 DONE_MSG="DONE"
 DOMAIN="homelab.lan"
