@@ -1,5 +1,6 @@
 include:
   - base.postgresql
+  - base.redis
 
 netbox_db-script:
   file.managed:
