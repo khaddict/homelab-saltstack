@@ -13,6 +13,14 @@ DNS_SERVERS=(
 GATEWAY="192.168.0.254"
 NETMASK="255.255.255.0"
 
+echo "--- RESIZE DISK ---"
+apt install -y parted
+parted /dev/sda resizepart 1 100%
+resize2fs /dev/sda1
+echo $DONE_MSG
+
+echo
+
 echo "--- SET HOSTNAME ---"
 echo -n "Which hostname you want for this virtual machine ? (not the FQDN) : "
 read HOSTNAME
