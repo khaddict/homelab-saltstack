@@ -90,3 +90,9 @@ echo "master: $SALTMASTER" > /etc/salt/minion
 echo $DONE_MSG
 
 echo
+
+echo "--- WRITE /ETC/SALT/MINION_ID ---"
+echo "$HOSTNAME.$DOMAIN" > /etc/salt/minion_id
+echo $DONE_MSG
+
+echo
