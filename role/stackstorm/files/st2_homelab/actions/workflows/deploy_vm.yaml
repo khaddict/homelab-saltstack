@@ -1,33 +1,106 @@
 version: 1.0
 description: Deploy a new VM.
 
-input: 
-  - hostname
+input:
+  - vm_id
+  - vm_name
+  - disk_resize
+  - memory_resize
+  - cores_resize
+  - description
+  - template
+
+vars:
+  - node: "n1-cls1"
+  - disk_type: "scsi0"
+  - vm_parameters: ""
 
 tasks:
-  echo_hostname:
-    action: core.local
-    input:
-      cmd: |
-        hostname
+  get_template_id:
+    action: core.noop
     next:
-      - when: <% succeeded() %>
-        do: echo_remote_hostname
+      - when: <% succeeded() and ctx().template = "bookworm" %>
+        do: clone_vm
         publish:
-          - var1: <% result().stdout %>
-  
-  echo_remote_hostname:
+          - template_id: 200
+      - when: <% succeeded() and ctx().template = "focal" %>
+        do: clone_vm
+        publish:
+          - template_id: 201
+      - when: <% failed() or (ctx().template != "focal" and ctx().template != "bookworm") %>
+        do: fail
+        publish:
+          - msg: "The template must be focal or bookworm."
+
+  clone_vm:
     action: core.remote
     input:
-      hosts: "saltmaster.homelab.lan"
+      hosts: "<% ctx().node %>.homelab.lan"
       username: root
       cmd: |
-        hostname
+        pvesh create /nodes/<% ctx().node %>/qemu/<% ctx().template_id %>/clone --newid <% ctx().vm_id %> --description "<% ctx().description %>" --full yes --name "<% ctx().vm_name %>"
+    next:
+      - when: <% succeeded() %>
+        do: resize_cores
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not create the VM."
+
+  resize_cores:
+    action: core.remote
+    input:
+      hosts: "<% ctx().node %>.homelab.lan"
+      username: root
+      cmd: |
+        pvesh create /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/config --cores <% ctx().cores_resize %>
+    next:
+      - when: <% succeeded() %>
+        do: resize_memory
+        publish:
+          - resize_cores_msg: "Cores resize done."
+      - when: <% failed() %>
+        do: resize_memory
+        publish:
+          - resize_cores_msg: "Could not resize cores."
+
+  resize_memory:
+    action: core.remote
+    input:
+      hosts: "<% ctx().node %>.homelab.lan"
+      username: root
+      cmd: |
+        pvesh create /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/config --memory <% ctx().memory_resize %>
+    next:
+      - when: <% succeeded() %>
+        do: resize_disk
+        publish:
+          - resize_memory_msg: "Memory resize done."
+      - when: <% failed() %>
+        do: resize_disk
+        publish:
+          - resize_memory_msg: "Could not resize the memory."
+
+  resize_disk:
+    action: core.remote
+    input:
+      hosts: "<% ctx().node %>.homelab.lan"
+      username: root
+      cmd: |
+        pvesh set /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/resize --disk scsi0 --size <% ctx().disk_resize %>
     next:
       - when: <% succeeded() %>
         publish:
-          - var2: <% result().stdout %>
+          - msg: "<% ctx().vm_name %> created."
+          - resize_disk_msg: "Disk resize done."
+          - vm_parameters: "vm_id=<% ctx().vm_id %>, vm_name=<% ctx().vm_name %>, disk_resize=<% ctx().disk_resize %>, memory_resize=<% ctx().memory_resize %>, cores_resize=<% ctx().cores_resize %>, description=<% ctx().description %>, template=<% ctx().template %>"
+      - when: <% failed() %>
+        do: noop
+        publish:
+          - resize_disk_msg: "Could not resize the disk."
 
 output:
-  - var1: <% ctx().var1 %>
-  - var2: <% ctx().var2 %>
+  - msg: <% ctx().msg %>
+  - vm_parameters: <% ctx().vm_parameters %>
+  - resize_cores_msg: <% ctx().resize_cores_msg %>
+  - resize_memory_msg: <% ctx().resize_memory_msg %>
+  - resize_disk_msg: <% ctx().resize_disk_msg %>
