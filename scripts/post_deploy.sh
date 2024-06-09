@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# wget https://raw.githubusercontent.com/khaddict/homelab/main/scripts/post_deploy.sh && chmod +x post_deploy.sh && apt install -y dos2unix && dos2unix post_deploy.sh && ./post_deploy.sh
+
 DONE_MSG="DONE"
 DOMAIN="homelab.lan"
 SALTMASTER="saltmaster.homelab.lan"
@@ -71,9 +73,15 @@ echo "--- PREPARE SALT-MINION INSTALL ---"
 DISTRO=$(cat /etc/os-release | grep ^ID= | awk -F= '{print $2}' | tr -d '"')
 VERSION=$(cat /etc/os-release | grep ^VERSION_ID= | awk -F= '{print $2}' | tr -d '"')
 VERSION_CODENAME=$(cat /etc/os-release | grep ^VERSION_CODENAME= | awk -F= '{print $2}' | tr -d '"')
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then
+    ARCH="amd64"
+elif [ "$ARCH" = "aarch64" ]; then
+    ARCH="arm64"
+fi
 mkdir -p /etc/apt/keyrings
-curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/$DISTRO/$VERSION/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
-echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/$DISTRO/$VERSION/amd64/latest $VERSION_CODENAME main" | tee /etc/apt/sources.list.d/salt.list
+curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/$DISTRO/$VERSION/$ARCH/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/$DISTRO/$VERSION/$ARCH/latest $VERSION_CODENAME main" | tee /etc/apt/sources.list.d/salt.list
 apt update
 echo $DONE_MSG
 
