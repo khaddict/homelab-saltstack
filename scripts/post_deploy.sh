@@ -96,3 +96,9 @@ echo "$HOSTNAME.$DOMAIN" > /etc/salt/minion_id
 echo $DONE_MSG
 
 echo
+
+echo "--- ENABLE AND START SALT-MINION SERVICE ---"
+systemctl enable salt-minion && systemctl start salt-minion
+echo $DONE_MSG
+
+echo
