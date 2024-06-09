@@ -60,3 +60,20 @@ netbox_user:
   file.directory:
     - user: netbox
     - group: netbox
+
+# Need to add Vault to manage passwords.
+#configuration_file:
+#  file.managed:
+#    - name: /opt/netbox/netbox/netbox/configuration.py
+#    - source: salt://role/netbox/files/configuration.py
+#    - mode: 644
+#    - user: root
+#    - group: root
+
+gunicorn_file:
+  file.managed:
+    - name: /opt/netbox/gunicorn.py
+    - source: salt://role/netbox/files/gunicorn.py
+    - mode: 644
+    - user: root
+    - group: root
