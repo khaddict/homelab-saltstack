@@ -18,3 +18,6 @@ base:
 
   'stackstorm.homelab.lan':
     - role.stackstorm
+
+  'netbox.homelab.lan':
+    - role.netbox
