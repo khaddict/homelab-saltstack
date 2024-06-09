@@ -36,6 +36,27 @@ netbox_repo:
     - name: https://github.com/netbox-community/netbox.git
     - target: /opt/netbox
     - branch: master
+    - rev: master
     - depth: 1
     - require:
       - file: opt_netbox_dir
+
+netbox_user:
+  user.present:
+    - name: netbox
+    - usergroup: True
+
+/opt/netbox/netbox/media:
+  file.directory:
+    - user: netbox
+    - group: netbox
+
+/opt/netbox/netbox/reports:
+  file.directory:
+    - user: netbox
+    - group: netbox
+
+/opt/netbox/netbox/scripts:
+  file.directory:
+    - user: netbox
+    - group: netbox
