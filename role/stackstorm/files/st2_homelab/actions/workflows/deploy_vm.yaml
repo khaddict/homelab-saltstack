@@ -89,14 +89,26 @@ tasks:
         pvesh set /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/resize --disk scsi0 --size <% ctx().disk_resize %>
     next:
       - when: <% succeeded() %>
+        do: start_vm
         publish:
           - msg: "<% ctx().vm_name %> created."
           - resize_disk_msg: "Disk resize done."
           - vm_parameters: "vm_id=<% ctx().vm_id %>, vm_name=<% ctx().vm_name %>, disk_resize=<% ctx().disk_resize %>, memory_resize=<% ctx().memory_resize %>, cores_resize=<% ctx().cores_resize %>, description=<% ctx().description %>, template=<% ctx().template %>"
       - when: <% failed() %>
-        do: noop
         publish:
           - resize_disk_msg: "Could not resize the disk."
+
+  start_vm:
+    action: core.remote
+    input:
+      hosts: "<% ctx().node %>.homelab.lan"
+      username: root
+      cmd: |
+        pvesh create /nodes/<% ctx().node %>/qemu/<% ctx().vm_id %>/status/start
+      next:
+      - when: <% failed() %>
+        publish:
+          - msg: "<% ctx().vm_name %> created but could not start the VM."
 
 output:
   - msg: <% ctx().msg %>
