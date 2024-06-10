@@ -40,5 +40,5 @@ service_ssh:
     - reload: True
     - watch:
       - file: sshd_config
-      - file: authorized_keys-file
-      - file: config-file
+      - file: authorized_keys_file
+      - file: ssh_config_file
