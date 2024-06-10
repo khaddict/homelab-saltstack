@@ -3,13 +3,13 @@
 
 # /etc/network/interfaces
 
-{{ fqdn }}-network-conf:
+{{ fqdn }}_network_conf:
   file.managed:
     - name: /etc/network/interfaces
     {% if fqdn is match('n\d-cls\d\.homelab\.lan') %}
-    - source: salt://global/common/files/network-conf-proxmox
+    - source: salt://global/common/network/files/network-conf-proxmox
     {% else %}
-    - source: salt://global/common/files/network-conf
+    - source: salt://global/common/network/files/network-conf
     {% endif %}
     - template: jinja
     - context:

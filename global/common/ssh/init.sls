@@ -1,4 +1,4 @@
-ssh_pkg:
+install_ssh:
   pkg.installed:
     - name: openssh-server
 
@@ -15,7 +15,7 @@ remove_symlink_if_present:
     - name: unlink /root/.ssh/authorized_keys
     - onlyif: test -L /root/.ssh/authorized_keys
 
-authorized_keys-file:
+authorized_keys_file:
   file.managed:
     - name: /root/.ssh/authorized_keys
     - source: salt://global/common/ssh/files/authorized_keys
@@ -25,7 +25,7 @@ authorized_keys-file:
     - require:
       - cmd: remove_symlink_if_present
 
-config-file:
+ssh_config_file:
   file.managed:
     - name: /root/.ssh/config
     - source: salt://global/common/ssh/files/config

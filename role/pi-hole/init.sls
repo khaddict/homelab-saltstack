@@ -1,4 +1,4 @@
-pi-hole-dns-entries-config:
+pi_hole_dns_entries_config:
   file.managed:
     - name: /etc/pihole/custom.list
     - source: salt://role/pi-hole/files/custom.list
@@ -6,10 +6,10 @@ pi-hole-dns-entries-config:
     - user: root
     - group: root
 
-reload-pihole-service:
+reload_pihole_service:
   service.running:
     - name: pihole-FTL
     - enable: True
     - reload: True
     - watch:
-      - file: pi-hole-dns-entries-config
+      - file: pi_hole_dns_entries_config

@@ -3,7 +3,7 @@
 {% set oscodename = grains["oscodename"] %}
 {% set os = grains["os"] | lower %}
 
-minion-config:
+minion_config:
   file.managed:
     - name: /etc/salt/minion
     - source: salt://global/common/salt-minion/files/minion
@@ -29,11 +29,11 @@ salt_repo_pkg:
     - require:
       - file: download_salt_gpg_key
 
-install_salt-minion:
+install_salt_minion:
   pkg.installed:
     - name: salt-minion
 
-service_salt-minion:
+service_salt_minion:
   service.running:
     - name: salt-minion
     - enable: True

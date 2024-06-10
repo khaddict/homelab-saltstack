@@ -3,10 +3,10 @@
 
 # /etc/resolv.conf
 
-{{ fqdn }}-resolv-conf:
+{{ fqdn }}_resolv_conf:
   file.managed:
     - name: /etc/resolv.conf
-    - source: salt://global/common/files/resolv-conf
+    - source: salt://global/common/resolv/files/resolv-conf
     - template: jinja
     - context:
         dns_nameservers: {{ network_confs.dns_nameservers }}
