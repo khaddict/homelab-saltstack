@@ -7,15 +7,13 @@ vault_dependencies:
       - gpg
       - wget
 
-download_vault_gpg_key:
+manage_hashicorp_gpg:
   file.managed:
     - name: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    - source: https://apt.releases.hashicorp.com/gpg
-    - makedirs: True
+    - source: salt://role/vault/files/hashicorp-archive-keyring.gpg
+    - mode: 644
     - user: root
     - group: root
-    - mode: 644
-    - skip_verify: True
 
 vault_repo_pkg:
   pkgrepo.managed:
