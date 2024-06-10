@@ -8,4 +8,4 @@ st2_homelab_installation:
   cmd.run:
     - name: "st2 pack install file:///opt/stackstorm/packs/st2_homelab/"
     - require: 
-        - file: st2_homelab-folder
+        - file: st2_homelab_folder
