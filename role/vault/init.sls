@@ -17,7 +17,7 @@ download_vault_gpg_key:
     - mode: 644
     - skip_verify: True
 
-salt_repo_pkg:
+vault_repo_pkg:
   pkgrepo.managed:
     - name: deb [arch={{ osarch }} signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ oscodename }} main
     - dist: {{ oscodename }}
