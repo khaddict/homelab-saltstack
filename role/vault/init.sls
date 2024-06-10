@@ -26,3 +26,23 @@ vault_repo_pkg:
 install_vault:
   pkg.installed:
     - name: vault
+
+vault_config:
+  file.managed:
+    - name: /etc/vault.d/vault.hcl
+    - source: salt://role/vault/files/vault.hcl
+    - mode: 644
+    - user: root
+    - group: root
+    - require:
+      - pkg: install_vault
+
+vault_service:
+  file.managed:
+    - name: /etc/systemd/system/vault.service
+    - source: salt://role/vault/files/vault.service
+    - mode: 644
+    - user: root
+    - group: root
+    - require:
+      - file: vault_config
