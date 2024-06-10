@@ -21,7 +21,7 @@ vault_repo_pkg:
     - dist: {{ oscodename }}
     - file: /etc/apt/sources.list.d/hashicorp.list
     - require:
-      - file: download_vault_gpg_key
+      - file: manage_hashicorp_gpg
 
 install_vault:
   pkg.installed:
