@@ -50,3 +50,8 @@ network_conf:
     ip_addr: "192.168.0.208"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
+  vault.homelab.lan:
+    main_iface: "ens18"
+    ip_addr: "192.168.0.209"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
