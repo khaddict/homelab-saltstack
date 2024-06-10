@@ -21,3 +21,6 @@ base:
 
   'netbox.homelab.lan':
     - role.netbox
+
+  'vault.homelab.lan':
+    - role.vault
