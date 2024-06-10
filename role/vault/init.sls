@@ -46,3 +46,10 @@ vault_service:
     - group: root
     - require:
       - file: vault_config
+
+start_enable_vault_service:
+  service.running:
+    - name: vault
+    - enable: True
+    - require:
+      - file: vault_service
