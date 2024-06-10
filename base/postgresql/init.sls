@@ -1,3 +1,3 @@
-install_postgresql_latest:
+install_postgresql:
   pkg.installed:
     - name: postgresql

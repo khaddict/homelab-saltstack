@@ -1,8 +1,9 @@
 include:
   - base.postgresql
   - base.redis
+  - base.nginx
 
-netbox_db-script:
+netbox_db_script:
   file.managed:
     - name: /tmp/netbox_db.sh
     - source: salt://scripts/netbox_db.sh
@@ -46,18 +47,21 @@ netbox_user:
     - name: netbox
     - usergroup: True
 
-/opt/netbox/netbox/media:
+netbox_media_chown:
   file.directory:
+    - name: /opt/netbox/netbox/media
     - user: netbox
     - group: netbox
 
-/opt/netbox/netbox/reports:
+netbox_reports_chown:
   file.directory:
+    - name: /opt/netbox/netbox/reports
     - user: netbox
     - group: netbox
 
-/opt/netbox/netbox/scripts:
+netbox_scripts_chown:
   file.directory:
+    - name: /opt/netbox/netbox/scripts
     - user: netbox
     - group: netbox
 
@@ -70,10 +74,93 @@ netbox_user:
 #    - user: root
 #    - group: root
 
-gunicorn_file:
+gunicorn_config:
   file.managed:
     - name: /opt/netbox/gunicorn.py
     - source: salt://role/netbox/files/gunicorn.py
     - mode: 644
     - user: root
     - group: root
+
+netbox_housekeeping_service:
+  file.managed:
+    - name: /etc/systemd/system/netbox-housekeeping.service
+    - source: salt://role/netbox/files/netbox-housekeeping.service
+    - mode: 644
+    - user: root
+    - group: root
+
+netbox_service:
+  file.managed:
+    - name: /etc/systemd/system/netbox.service
+    - source: salt://role/netbox/files/netbox.service
+    - mode: 644
+    - user: root
+    - group: root
+
+netbox_rq_service:
+  file.managed:
+    - name: /etc/systemd/system/netbox-rq.service
+    - source: salt://role/netbox/files/netbox-rq.service
+    - mode: 644
+    - user: root
+    - group: root
+
+start_enable_netbox_service:
+  service.running:
+    - name: netbox
+    - enable: True
+    - watch:
+      - file: netbox_service
+
+start_enable_netbox_rq_service:
+  service.running:
+    - name: netbox-rq
+    - enable: True
+    - watch:
+      - file: netbox_rq_service
+
+netbox_key:
+  x509.private_key_managed:
+    - name: /etc/ssl/private/netbox.key
+    - bits: 2048
+    - cipher: rsa
+
+netbox_certificate:
+  x509.certificate_managed:
+    - name: /etc/ssl/certs/netbox.crt
+    - signing_private_key: /etc/ssl/private/netbox.key
+    - CN: netbox.homelab.lan
+    - C: FR
+    - ST: France
+    - L: Paris
+    - days_valid: 365
+    - days_remaining: 0
+    - backup: True
+    - require:
+      - x509: netbox_key
+
+netbox_config:
+  file.managed:
+    - name: /etc/nginx/sites-available/netbox
+    - source: salt://role/netbox/files/netbox
+    - mode: 644
+    - user: root
+    - group: root
+
+remove_nginx_default:
+  file.absent:
+    - name: /etc/nginx/sites-enabled/default
+
+create_netbox_symlink:
+  file.symlink:
+    - name: /etc/nginx/sites-enabled/netbox
+    - target: /etc/nginx/sites-available/netbox
+
+restart_nginx_service:
+  service.running:
+    - name: nginx
+    - enable: True
+    - reload: True
+    - watch:
+      - file: netbox_config
