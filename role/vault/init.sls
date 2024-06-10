@@ -17,12 +17,6 @@ download_vault_gpg_key:
     - mode: 644
     - skip_verify: True
 
-manage_hashicorp_gpg:
-  cmd.run:
-    - name: "gpg --no-tty --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
-    - require: 
-        - file: download_vault_gpg_key
-
 vault_repo_pkg:
   pkgrepo.managed:
     - name: deb [arch={{ osarch }} signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ oscodename }} main
