@@ -120,26 +120,6 @@ start_enable_netbox_rq_service:
     - watch:
       - file: netbox_rq_service
 
-netbox_key:
-  x509.private_key_managed:
-    - name: /etc/ssl/private/netbox.key
-    - bits: 2048
-    - cipher: rsa
-
-netbox_certificate:
-  x509.certificate_managed:
-    - name: /etc/ssl/certs/netbox.crt
-    - signing_private_key: /etc/ssl/private/netbox.key
-    - CN: netbox.homelab.lan
-    - C: FR
-    - ST: France
-    - L: Paris
-    - days_valid: 365
-    - days_remaining: 0
-    - backup: True
-    - require:
-      - x509: netbox_key
-
 netbox_config:
   file.managed:
     - name: /etc/nginx/sites-available/netbox
