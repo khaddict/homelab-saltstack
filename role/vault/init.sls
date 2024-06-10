@@ -18,7 +18,7 @@ download_vault_gpg_key:
     - skip_verify: True
 
 manage_hashicorp_gpg:
-  cmd.run
+  cmd.run:
     - name: "gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
     - require: 
         - file: download_vault_gpg_key
