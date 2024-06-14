@@ -33,7 +33,7 @@ ssh_config_file:
     - user: root
     - group: root
 
-service_ssh:
+reload_service_ssh:
   service.running:
     - name: ssh
     - enable: True

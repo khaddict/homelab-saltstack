@@ -44,8 +44,8 @@ add_{{ host }}_symlink:
 nginx_service:
   service.running:
     - name: nginx
-    - enable: true
+    - enable: True
+    - reload: True
     - watch:
       - file: {{ host }}_config
       - file: {{ host }}_website
-    - reload: true
