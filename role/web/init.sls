@@ -26,14 +26,14 @@ remove_default_nginx_config:
 
 add_{{ fqdn }}_symlink:
   file.symlink:
-    - name: /etc/nginx/sites-enabled/{{ fqdn }}/{{ fqdn }}.conf
-    - target: /etc/nginx/sites-available/{{ fqdn }}/{{ fqdn }}.conf
+    - name: /etc/nginx/sites-enabled/{{ fqdn }}.conf
+    - target: /etc/nginx/sites-available/{{ fqdn }}.conf
     - require:
       - file: {{ fqdn }}_config
 
 {{ fqdn }}_website:
   file.managed:
-    - name: /var/www/html/{{ fqdn }}.html
+    - name: /var/www/html/{{ fqdn }}/{{ fqdn }}.html
     - source: salt://role/web/files/website.html
     - mode: 644
     - user: root
