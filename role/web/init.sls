@@ -26,10 +26,10 @@ remove_default_nginx_config:
 
 add_khaddict_symlink:
   file.symlink:
-    - name: /etc/nginx/sites-enabled/khaddict.conf
-    - target: /etc/nginx/sites-available/khaddict.conf
+    - name: /etc/nginx/sites-enabled/{{ fqdn }}.conf
+    - target: /etc/nginx/sites-available/{{ fqdn }}.conf
     - require:
-      - file: add_khaddict_config
+      - file: {{ fqdn }}_config
 
 {{ fqdn }}_website:
   file.managed:
@@ -46,6 +46,6 @@ nginx_service:
     - name: nginx
     - enable: true
     - watch:
-      - file: add_khaddict_config
-      - file: add_khaddict_site
+      - file: {{ fqdn }}_config
+      - file: {{ fqdn }}_website
     - reload: true
