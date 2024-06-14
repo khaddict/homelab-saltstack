@@ -25,8 +25,8 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
 - `web02.homelab.lan` : deuxième serveur web équivalent au premier
-- `hap01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web
-- `hap02.homelab.lan` : deuxième HAProxy + Keepalived
+- `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web
+- `ha02.homelab.lan` : deuxième HAProxy + Keepalived
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 
 ### Après
