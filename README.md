@@ -12,25 +12,25 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 
 ### Fait
 
-- `master.homelab.lan` : machine "test" sur laquelle il est possible de faire un peu n'importe quoi (des curl, des boucles...) + git installé dessus pour gérer les repo GitHub
-- `saltmaster.homelab.lan` : saltmaster qui pilote ses minions → gestion de configurations
-- `pi-hole01.homelab.lan` : premier Pi-hole pour gérer la partie DNS + adblocker. Entrées DNS gérées directement via le fichier `/etc/pihole/custom.list`
-- `pi-hole02.homelab.lan` : deuxième Pi-hole
-- `stackstorm.homelab.lan` :  stackstorm permet de gérer les automatisations
+- ✅ `master.homelab.lan` : machine "test" sur laquelle il est possible de faire un peu n'importe quoi (des curl, des boucles...) + git installé dessus pour gérer les repo GitHub
+- ✅ `saltmaster.homelab.lan` : saltmaster qui pilote ses minions → gestion de configurations
+- ✅ `pi-hole01.homelab.lan` : premier Pi-hole pour gérer la partie DNS + adblocker. Entrées DNS gérées directement via le fichier `/etc/pihole/custom.list`
+- ✅ `pi-hole02.homelab.lan` : deuxième Pi-hole
+- ✅ `stackstorm.homelab.lan` :  stackstorm permet de gérer les automatisations
+- ✅ `vault.homelab.lan` : machine Vault pour stocker les secrets qui doivent être récupérables via SaltStack
+- ✅ `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
 
 ### En cours
 
-- `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
 - `web02.homelab.lan` : deuxième serveur web équivalent au premier
 - `hap01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web
 - `hap02.homelab.lan` : deuxième HAProxy + Keepalived
+- `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 
 ### Après
 
-- `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
-- `vault.homelab.lan` : machine Vault pour stocker les secrets qui doivent être récupérables via SaltStack
 - `smtp.homelab.lan` : machine SMTP
 - `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
 - `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
