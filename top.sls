@@ -24,3 +24,9 @@ base:
 
   'vault.homelab.lan':
     - role.vault
+
+  'web??.homelab.lan':
+    - role.web
+
+  'ha??.homelab.lan':
+    - role.ha
