@@ -13,3 +13,5 @@
 192.168.0.209 vault.homelab.lan
 192.168.0.210 web01.homelab.lan
 192.168.0.211 web02.homelab.lan
+192.168.0.212 ha01.homelab.lan
+192.168.0.213 ha02.homelab.lan
