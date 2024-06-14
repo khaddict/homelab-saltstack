@@ -1,3 +1,5 @@
+{% set fqdn = grains["fqdn"] %}
+
 include:
   - base.nginx
 
@@ -9,15 +11,18 @@ remove_default_nginx_config:
     - require:
       - install_nginx
 
-add_khaddict_config:
+{{ fqdn }}_config:
   file.managed:
-    - name: /etc/nginx/sites-available/khaddict.conf
-    - source: salt://role/web/files/khaddict.conf
+    - name: /etc/nginx/sites-available/{{ fqdn }}.conf
+    - source: salt://role/web/files/nginx.conf
     - mode: 644
     - user: root
     - group: root
     - require:
       - file: remove_default_nginx_config
+    - template: jinja
+    - context:
+        fqdn: {{ fqdn }}
 
 add_khaddict_symlink:
   file.symlink:
@@ -26,10 +31,10 @@ add_khaddict_symlink:
     - require:
       - file: add_khaddict_config
 
-add_khaddict_site:
+{{ fqdn }}_website:
   file.managed:
-    - name: /var/www/html/khaddict.html
-    - source: salt://role/web/files/khaddict.html
+    - name: /var/www/html/{{ fqdn }}.html
+    - source: salt://role/web/files/website.html
     - mode: 644
     - user: root
     - group: root
