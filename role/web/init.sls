@@ -24,10 +24,10 @@ remove_default_nginx_config:
     - context:
         fqdn: {{ fqdn }}
 
-add_khaddict_symlink:
+add_{{ fqdn }}_symlink:
   file.symlink:
-    - name: /etc/nginx/sites-enabled/{{ fqdn }}.conf
-    - target: /etc/nginx/sites-available/{{ fqdn }}.conf
+    - name: /etc/nginx/sites-enabled/{{ fqdn }}/{{ fqdn }}.conf
+    - target: /etc/nginx/sites-available/{{ fqdn }}/{{ fqdn }}.conf
     - require:
       - file: {{ fqdn }}_config
 
