@@ -1,4 +1,4 @@
-{% set fqdn = grains["fqdn"] %}
+{% set host = grains["host"] %}
 
 include:
   - base.nginx
@@ -11,9 +11,9 @@ remove_default_nginx_config:
     - require:
       - install_nginx
 
-{{ fqdn }}_config:
+{{ host }}_config:
   file.managed:
-    - name: /etc/nginx/sites-available/{{ fqdn }}.conf
+    - name: /etc/nginx/sites-available/{{ host }}.conf
     - source: salt://role/web/files/nginx.conf
     - mode: 644
     - user: root
@@ -22,18 +22,18 @@ remove_default_nginx_config:
       - file: remove_default_nginx_config
     - template: jinja
     - context:
-        fqdn: {{ fqdn }}
+        host: {{ host }}
 
-add_{{ fqdn }}_symlink:
+add_{{ host }}_symlink:
   file.symlink:
-    - name: /etc/nginx/sites-enabled/{{ fqdn }}.conf
-    - target: /etc/nginx/sites-available/{{ fqdn }}.conf
+    - name: /etc/nginx/sites-enabled/{{ host }}.conf
+    - target: /etc/nginx/sites-available/{{ host }}.conf
     - require:
-      - file: {{ fqdn }}_config
+      - file: {{ host }}_config
 
-{{ fqdn }}_website:
+{{ host }}_website:
   file.managed:
-    - name: /var/www/html/{{ fqdn }}/{{ fqdn }}.html
+    - name: /var/www/html/{{ host }}/{{ host }}.html
     - source: salt://role/web/files/website.html
     - mode: 644
     - user: root
@@ -46,6 +46,6 @@ nginx_service:
     - name: nginx
     - enable: true
     - watch:
-      - file: {{ fqdn }}_config
-      - file: {{ fqdn }}_website
+      - file: {{ host }}_config
+      - file: {{ host }}_website
     - reload: true
