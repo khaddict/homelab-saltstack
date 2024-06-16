@@ -21,7 +21,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
 - ✅ `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
 - ✅ `web02.homelab.lan` : deuxième serveur web équivalent au premier
-- ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : web.homelab.lan)
+- ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : `web.homelab.lan`)
 - ✅ `ha02.homelab.lan` : deuxième HAProxy + Keepalived
 
 ### En cours
