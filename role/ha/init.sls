@@ -1,3 +1,7 @@
+{% set fqdn = grains["fqdn"] %}
+{% set ha_iface = 'enp0s11' %}
+{% set vip = '192.168.0.214' %}
+
 include:
   - base.haproxy
   - base.keepalived
@@ -17,3 +21,24 @@ restart_haproxy_service:
     - reload: True
     - watch:
       - file: haproxy_config
+
+keepalived_config:
+  file.managed:
+    - name: /etc/keepalived/keepalived.conf
+    - source: salt://role/ha/files/keepalived.conf
+    - mode: 644
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+        fqdn: {{ fqdn }}
+        ha_iface: {{ ha_iface }}
+        vip: {{ vip }}
+
+restart_keepalived_service:
+  service.running:
+    - name: keepalived
+    - enable: True
+    - reload: True
+    - watch:
+      - file: keepalived_config
