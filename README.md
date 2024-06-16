@@ -21,11 +21,12 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
 - ✅ `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
 - ✅ `web02.homelab.lan` : deuxième serveur web équivalent au premier
-- ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : web.homelab.lan)
+- ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : `web.homelab.lan`)
 - ✅ `ha02.homelab.lan` : deuxième HAProxy + Keepalived
 
 ### En cours
 
+- `ntp.homelab.lan` : machine NTP → chrony
 - `ldap.homelab.lan` : machine LDAP
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
@@ -36,7 +37,3 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
 - `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
 - `terraform.homelab.lan` : mettre en place une partie de l'automatisation avec Terraform pour apprendre les basiques
-
-### Axes de réflexion
-
-- Comment gérer au mieux la HA des Pi-hole ? Ils ne sont pas sur la même multiprise, possible de les laisser indépendants et réglages côté DHCP ou besoin d'utiliser Keepalived / HAProxy ? 
