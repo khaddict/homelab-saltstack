@@ -32,6 +32,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 
 ### Après
 
+- `ntp.homelab.lan` : machine NTP : chrony
 - `smtp.homelab.lan` : machine SMTP
 - `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
 - `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
