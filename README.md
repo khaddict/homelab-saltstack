@@ -22,6 +22,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 
 ### En cours
 
+- `ldap.homelab.lan` : machine LDAP
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
 - `web02.homelab.lan` : deuxième serveur web équivalent au premier
