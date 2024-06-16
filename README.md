@@ -19,15 +19,15 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `stackstorm.homelab.lan` :  stackstorm permet de gérer les automatisations
 - ✅ `vault.homelab.lan` : machine Vault pour stocker les secrets qui doivent être récupérables via SaltStack
 - ✅ `netbox.homelab.lan` : machine NetBox pour l'inventaire des ressources + permet de récupérer pour réutiliser certaines variables dans des workflows StackStorm 
+- ✅ `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
+- ✅ `web02.homelab.lan` : deuxième serveur web équivalent au premier
+- ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : web.homelab.lan)
+- ✅ `ha02.homelab.lan` : deuxième HAProxy + Keepalived
 
 ### En cours
 
 - `ldap.homelab.lan` : machine LDAP
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
-- `web01.homelab.lan` : premier serveur web (contenu pas important pour le moment)
-- `web02.homelab.lan` : deuxième serveur web équivalent au premier
-- `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web
-- `ha02.homelab.lan` : deuxième HAProxy + Keepalived
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 
 ### Après
