@@ -22,6 +22,10 @@ restart_haproxy_service:
     - watch:
       - file: haproxy_config
 
+remove_keepalived_default:
+  file.absent:
+    - name: /etc/keepalived/keepalived.conf.sample
+
 keepalived_config:
   file.managed:
     - name: /etc/keepalived/keepalived.conf
