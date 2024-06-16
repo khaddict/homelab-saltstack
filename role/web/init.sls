@@ -36,7 +36,8 @@ add_{{ host }}_symlink:
     - name: /var/www/html/{{ host }}
     - source: salt://role/web/files/website/
     - include_empty: True
-    - mode: 644
+    - dir_mode: 755
+    - file_mode: 644
     - user: root
     - group: root
     - require:
