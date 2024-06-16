@@ -26,18 +26,14 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 
 ### En cours
 
+- `ntp.homelab.lan` : machine NTP → chrony
 - `ldap.homelab.lan` : machine LDAP
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 
 ### Après
 
-- `ntp.homelab.lan` : machine NTP : chrony
 - `smtp.homelab.lan` : machine SMTP
 - `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
 - `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
 - `terraform.homelab.lan` : mettre en place une partie de l'automatisation avec Terraform pour apprendre les basiques
-
-### Axes de réflexion
-
-- Comment gérer au mieux la HA des Pi-hole ? Ils ne sont pas sur la même multiprise, possible de les laisser indépendants et réglages côté DHCP ou besoin d'utiliser Keepalived / HAProxy ? 
