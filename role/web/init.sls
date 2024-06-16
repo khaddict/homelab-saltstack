@@ -32,9 +32,10 @@ add_{{ host }}_symlink:
       - file: {{ host }}_config
 
 {{ host }}_website:
-  file.managed:
-    - name: /var/www/html/{{ host }}/{{ host }}.html
-    - source: salt://role/web/files/website.html
+  file.recurse:
+    - name: /var/www/html/{{ host }}
+    - source: salt://role/web/files/website/
+    - include_empty: True
     - mode: 644
     - user: root
     - group: root
