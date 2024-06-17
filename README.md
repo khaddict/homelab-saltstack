@@ -30,6 +30,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - `ldap.homelab.lan` : machine LDAP
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
+- `pfsense.homelab.lan` : PfSense pour gérer la partie firewall
 
 ### Après
 
