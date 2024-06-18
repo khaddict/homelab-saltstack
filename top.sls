@@ -30,3 +30,6 @@ base:
 
   'ha??.homelab.lan':
     - role.ha
+
+  'ldap.homelab.lan':
+    - role.ldap
