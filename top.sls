@@ -42,3 +42,6 @@ base:
 
   'ntp.homelab.lan':
     - role.ntp
+
+  'grafana.homelab.lan':
+    - role.grafana
