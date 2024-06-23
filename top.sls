@@ -33,3 +33,12 @@ base:
 
   'ldap.homelab.lan':
     - role.ldap
+
+  'prometheus.homelab.lan':
+    - role.prometheus
+
+  'ca.homelab.lan':
+    - role.ca
+
+  'ntp.homelab.lan':
+    - role.ntp

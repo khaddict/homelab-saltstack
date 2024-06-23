@@ -17,3 +17,6 @@
 192.168.0.213 ha02.homelab.lan
 192.168.0.214 web.homelab.lan
 192.168.0.215 ldap.homelab.lan
+192.168.0.216 prometheus.homelab.lan
+192.168.0.217 ca.homelab.lan
+192.168.0.218 ntp.homelab.lan

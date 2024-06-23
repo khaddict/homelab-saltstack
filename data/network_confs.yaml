@@ -80,3 +80,18 @@ network_conf:
     ip_addr: "192.168.0.215"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
+  prometheus.homelab.lan:
+    main_iface: "ens18"
+    ip_addr: "192.168.0.216"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
+  ca.homelab.lan:
+    main_iface: "ens18"
+    ip_addr: "192.168.0.217"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
+  ntp.homelab.lan:
+    main_iface: "ens18"
+    ip_addr: "192.168.0.218"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
