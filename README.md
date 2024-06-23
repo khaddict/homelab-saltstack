@@ -29,6 +29,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 
 - `ntp.homelab.lan` : machine NTP → chrony
 - `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
+- `grafana.homelab.lan` : machine Grafana
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 - `pfsense.homelab.lan` : PfSense pour gérer la partie firewall
 
