@@ -8,7 +8,7 @@ groups:
           descriptions: |-
             Prometheus exporter down
             VALUE = {{ $value }}
-        expr: node_systemd_unit_state{instance=~".*homelab.lan", name="prometheus-node-exporter.service", state="active"} == 0
+        expr: up{instance=~".*homelab.lan"} == 0
         for: 1m
         labels:
           severity: warning
