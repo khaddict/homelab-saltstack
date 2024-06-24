@@ -56,3 +56,4 @@ start_enable_prometheus_service:
     - enable: True
     - watch:
       - file: prometheus_config
+      - file: prometheus_rules
