@@ -23,8 +23,25 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets:
+          - 'n1-cls1.homelab.lan:9100'
+          - 'n2-cls1.homelab.lan:9100'
+          - 'n3-cls1.homelab.lan:9100'
+          - 'ca.homelab.lan:9100'
+          - 'grafana.homelab.lan:9100'
+          - 'ha01.homelab.lan:9100'
+          - 'ha02.homelab.lan:9100'
+          - 'ldap.homelab.lan:9100'
+          - 'main.homelab.lan:9100'
+          - 'netbox.homelab.lan:9100'
+          - 'ntp.homelab.lan:9100'
+          - 'pi-hole01.homelab.lan:9100'
+          - 'pi-hole02.homelab.lan:9100'
           - 'prometheus.homelab.lan:9100'
           - 'saltmaster.homelab.lan:9100'
+          - 'stackstorm.homelab.lan:9200' # StackStorm already uses port 9100, so prometheus-node-exporter bind on 9200
+          - 'vault.homelab.lan:9100'
+          - 'web01.homelab.lan:9100'
+          - 'web02.homelab.lan:9100'
     relabel_configs:
       - source_labels: [__address__]
         regex: '^([^:]+):[0-9]+$'
