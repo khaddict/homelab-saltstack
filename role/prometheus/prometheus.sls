@@ -32,6 +32,12 @@ prometheus_config:
     - require:
       - archive: extract_prometheus
 
+prometheus_rules:
+  file.recurse:
+    - name: /etc/prometheus/rules
+    - source: salt://role/prometheus/files/rules
+    - include_empty: True
+
 prometheus_service:
   file.managed:
     - name: /etc/systemd/system/prometheus.service
