@@ -25,3 +25,8 @@ scrape_configs:
       - targets:
           - 'prometheus.homelab.lan:9100'
           - 'saltmaster.homelab.lan:9100'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '^([^:]+):[0-9]+$'
+        replacement: '$1'
+        target_label: instance
