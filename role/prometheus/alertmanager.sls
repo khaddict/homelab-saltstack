@@ -4,6 +4,8 @@ alertmanager_user:
   user.present:
     - name: alertmanager
     - usergroup: True
+    - createhome: False
+    - system: True
 
 extract_alertmanager:
   archive.extracted:

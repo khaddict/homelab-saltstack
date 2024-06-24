@@ -4,6 +4,8 @@ prometheus_user:
   user.present:
     - name: prometheus
     - usergroup: True
+    - createhome: False
+    - system: True
 
 extract_prometheus:
   archive.extracted:
