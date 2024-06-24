@@ -9,3 +9,4 @@ include:
   - .hosts
   - .resolv
   - .network
+  - base.node_exporter

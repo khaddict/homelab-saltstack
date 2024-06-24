@@ -3,14 +3,8 @@ route:
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 1h
-  receiver: 'web.hook'
+  receiver: 'prometheus_alerts_discord'
 receivers:
-  - name: 'web.hook'
+  - name: 'prometheus_alerts_discord'
     webhook_configs:
-      - url: 'http://127.0.0.1:5001/'
-inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'dev', 'instance']
+      - url: 'https://discord.com/api/webhooks/xxxxxxxxxxxxxxxxxxxxxxx'
