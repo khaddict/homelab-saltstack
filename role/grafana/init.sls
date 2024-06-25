@@ -1,4 +1,5 @@
 {% set oscodename = grains["oscodename"] %}
+{% set ldap_password = salt['vault'].read_secret('kv/grafana').ldap_password %}
 
 grafana_dependencies:
   pkg.installed:
@@ -32,3 +33,22 @@ service_grafana:
     - enable: True
     - require:
       - pkg: install_grafana
+
+ldap_config:
+  file.managed:
+    - name: /etc/grafana/ldap.toml
+    - source: salt://role/grafana/files/ldap.toml
+    - mode: 640
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+        ldap_password: {{ ldap_password }}
+
+grafana_config:
+  file.managed:
+    - name: /etc/grafana/grafana.ini
+    - source: salt://role/grafana/files/grafana.ini
+    - mode: 640
+    - user: root
+    - group: root
