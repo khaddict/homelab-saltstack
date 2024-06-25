@@ -4,8 +4,8 @@ groups:
     rules:
       - alert: ExporterDown
         annotations:
-          summary: Exporter down (instance {{ $labels.instance }})
-          description: Prometheus exporter down (value {{ $value }})
+          summary: "Exporter down (instance {{ $labels.instance }})"
+          description: "Prometheus exporter down (value {{ $value }})"
         expr: up{instance=~".*homelab.lan"} == 0
         for: 5m
         labels:
@@ -13,8 +13,8 @@ groups:
 
       - alert: HostOutOfMemory
         annotations:
-          summary: Host out of memory (instance {{ $labels.instance }})
-          description: Node memory is filling up (< 10% left) (value {{ $value }})
+          summary: "Host out of memory (instance {{ $labels.instance }})"
+          description: "Node memory is filling up (< 10% left) (value {{ $value }})"
         expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
         for: 5m
         labels:
@@ -22,8 +22,8 @@ groups:
 
       - alert: FanHighSpeed
         annotations:
-          summary: Host {{ $labels.sensor }} speed is high (instance {{ $labels.instance }})
-          description: {{ $labels.instance }} {{ $labels.sensor }} speed is high (> 8000 RPM) (value {{ $value }})
+          summary: "Host {{ $labels.sensor }} speed is high (instance {{ $labels.instance }})"
+          description: "{{ $labels.instance }} {{ $labels.sensor }} speed is high (> 8000 RPM) (value {{ $value }})"
         expr: node_hwmon_fan_rpm > 8000
         for: 5m
         labels:
@@ -31,8 +31,8 @@ groups:
 
       - alert: ComponentHot
         annotations:
-          summary: {{ $labels.chip }} is hot (instance {{ $labels.instance }})
-          description: {{ $labels.chip }} on {{ $labels.sensor }} is hot (> 70°C) (value {{ $value }})
+          summary: "{{ $labels.chip }} is hot (instance {{ $labels.instance }})"
+          description: "{{ $labels.chip }} on {{ $labels.sensor }} is hot (> 70°C) (value {{ $value }})"
         expr: node_hwmon_temp_celsius > 70
         for: 5m
         labels:
