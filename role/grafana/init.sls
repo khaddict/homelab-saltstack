@@ -40,7 +40,7 @@ ldap_config:
     - source: salt://role/grafana/files/ldap.toml
     - mode: 640
     - user: root
-    - group: root
+    - group: grafana
     - template: jinja
     - context:
         ldap_password: {{ ldap_password }}
@@ -51,4 +51,4 @@ grafana_config:
     - source: salt://role/grafana/files/grafana.ini
     - mode: 640
     - user: root
-    - group: root
+    - group: grafana
