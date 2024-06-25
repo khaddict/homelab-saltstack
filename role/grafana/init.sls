@@ -27,13 +27,6 @@ install_grafana:
   pkg.installed:
     - name: grafana
 
-service_grafana:
-  service.running:
-    - name: grafana-server
-    - enable: True
-    - require:
-      - pkg: install_grafana
-
 ldap_config:
   file.managed:
     - name: /etc/grafana/ldap.toml
@@ -52,3 +45,13 @@ grafana_config:
     - mode: 640
     - user: root
     - group: grafana
+
+service_grafana:
+  service.running:
+    - name: grafana-server
+    - enable: True
+    - require:
+      - pkg: install_grafana
+    - watch:
+      - file: ldap_config
+      - file: grafana_config
