@@ -18,7 +18,6 @@ manage_grafana_key:
 grafana_repo_pkg:
   pkgrepo.managed:
     - name: deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main
-    - dist: {{ oscodename }}
     - file: /etc/apt/sources.list.d/grafana.list
     - require:
       - file: manage_grafana_key
@@ -26,3 +25,10 @@ grafana_repo_pkg:
 install_grafana:
   pkg.installed:
     - name: grafana
+
+service_grafana:
+  service.running:
+    - name: grafana
+    - enable: True
+    - require:
+      - pkg: install_grafana
