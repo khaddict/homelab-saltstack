@@ -1,3 +1,6 @@
+{% set database_password = salt['vault'].read_secret('kv/netbox').database_password %}
+{% set secret_key = salt['vault'].read_secret('kv/netbox').secret_key %}
+
 include:
   - base.postgresql
   - base.redis
@@ -65,14 +68,17 @@ netbox_scripts_chown:
     - user: netbox
     - group: netbox
 
-# Need to add Vault to manage passwords.
-#configuration_file:
-#  file.managed:
-#    - name: /opt/netbox/netbox/netbox/configuration.py
-#    - source: salt://role/netbox/files/configuration.py
-#    - mode: 644
-#    - user: root
-#    - group: root
+configuration_file:
+  file.managed:
+    - name: /opt/netbox/netbox/netbox/configuration.py
+    - source: salt://role/netbox/files/configuration.py
+    - mode: 644
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+        database_password: {{ database_password }}
+        secret_key: {{ secret_key }}
 
 gunicorn_config:
   file.managed:

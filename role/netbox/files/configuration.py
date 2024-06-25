@@ -16,7 +16,7 @@ DATABASE = {
     'ENGINE': 'django.db.backends.postgresql',  # Database engine
     'NAME': 'netbox',         # Database name
     'USER': 'netbox',               # PostgreSQL username
-    'PASSWORD': '<password>',           # PostgreSQL password
+    'PASSWORD': '{{ database_password }}',           # PostgreSQL password
     'HOST': 'localhost',      # Database server
     'PORT': '',               # Database port (leave blank for default)
     'CONN_MAX_AGE': 300,      # Max database connection age
@@ -64,7 +64,7 @@ REDIS = {
 # For optimal security, SECRET_KEY should be at least 50 characters in length and contain a mix of letters, numbers, and
 # symbols. NetBox will not run without this defined. For more information, see
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECRET_KEY
-SECRET_KEY = '<password>'
+SECRET_KEY = {{ secret_key }}
 
 
 #########################

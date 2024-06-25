@@ -8,4 +8,4 @@ route:
 receivers:
 - name: prometheus_alerts_discord
   discord_configs:
-  - webhook_url: 'https://discord.com/api/webhooks/xxxxxxxxxxxxxxxxxxxxxxx'
+  - webhook_url: '{{ webhook_url }}'

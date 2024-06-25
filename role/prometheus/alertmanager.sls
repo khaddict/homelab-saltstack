@@ -1,4 +1,5 @@
 {% set alertmanager_version = '0.27.0' %}
+{% set webhook_url = salt['vault'].read_secret('kv/prometheus').webhook_url %}
 
 alertmanager_user:
   user.present:
@@ -33,6 +34,9 @@ alertmanager_config:
     - group: alertmanager
     - require:
       - archive: extract_alertmanager
+    - template: jinja
+    - context:
+        webhook_url: {{ webhook_url }}
 
 alertmanager_service:
   file.managed:
