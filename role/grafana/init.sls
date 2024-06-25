@@ -21,7 +21,7 @@ grafana_repo_pkg:
     - dist: {{ oscodename }}
     - file: /etc/apt/sources.list.d/grafana.list
     - require:
-      - file: manage_grafana_gpg
+      - file: manage_grafana_key
 
 install_grafana:
   pkg.installed:
