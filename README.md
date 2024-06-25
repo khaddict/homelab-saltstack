@@ -23,13 +23,13 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `web02.homelab.lan` : deuxième serveur web équivalent au premier
 - ✅ `ha01.homelab.lan` : premier HAProxy + Keepalived pour gérer la HA sur les serveurs web (la VIP : `web.homelab.lan`)
 - ✅ `ha02.homelab.lan` : deuxième HAProxy + Keepalived
-- ✅ `ldap.homelab.lan` : machine LDAP + PHPLDAPADMIN
+- ✅ `ldap.homelab.lan` : machine LDAP + PHPLDAPAdmin
+- ✅ `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting (redirections vers Discord)
+- ✅ `grafana.homelab.lan` : machine Grafana
 
 ### En cours
 
 - `ntp.homelab.lan` : machine NTP → chrony
-- `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting. Faire en sorte de rediriger les alertes je ne sais où (vers un discord spécial alertes via webhooks?)
-- `grafana.homelab.lan` : machine Grafana
 - `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 - `pfsense.homelab.lan` : PfSense pour gérer la partie firewall
 
