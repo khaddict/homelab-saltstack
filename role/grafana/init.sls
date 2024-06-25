@@ -28,7 +28,7 @@ install_grafana:
 
 service_grafana:
   service.running:
-    - name: grafana
+    - name: grafana-server
     - enable: True
     - require:
       - pkg: install_grafana
