@@ -45,3 +45,6 @@ base:
 
   'grafana.homelab.lan':
     - role.grafana
+
+  'elk.homelab.lan':
+    - role.elk

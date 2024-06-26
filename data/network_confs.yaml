@@ -100,3 +100,8 @@ network_conf:
     ip_addr: "192.168.0.219"
     netmask: "255.255.255.0"
     gateway: "192.168.0.254"
+  elk.homelab.lan:
+    main_iface: "ens18"
+    ip_addr: "192.168.0.220"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
