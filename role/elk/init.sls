@@ -1,3 +1,4 @@
 include:
   - .elasticsearch
   - .kibana
+  - .logstash
