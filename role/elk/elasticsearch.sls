@@ -30,6 +30,14 @@ elasticsearch_config:
     - user: root
     - group: elasticsearch
 
+jvm_heap_options:
+  file.managed:
+    - name: /etc/elasticsearch/jvm.options.d/jvm-heap.options
+    - source: salt://role/elk/files/jvm-heap.options
+    - mode: 644
+    - user: root
+    - group: elasticsearch
+
 service_elasticsearch:
   service.running:
     - name: elasticsearch
