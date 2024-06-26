@@ -26,7 +26,7 @@ elasticsearch_config:
   file.managed:
     - name: /etc/elasticsearch/elasticsearch.yml
     - source: salt://role/elk/files/elasticsearch.yml
-    - mode: 770
+    - mode: 660
     - user: root
     - group: elasticsearch
 
