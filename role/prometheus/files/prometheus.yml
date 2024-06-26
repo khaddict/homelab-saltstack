@@ -27,6 +27,7 @@ scrape_configs:
           - 'n2-cls1.homelab.lan:9100'
           - 'n3-cls1.homelab.lan:9100'
           - 'ca.homelab.lan:9100'
+          - 'elk.homelab.lan:9100'
           - 'grafana.homelab.lan:9100'
           - 'ha01.homelab.lan:9100'
           - 'ha02.homelab.lan:9100'
