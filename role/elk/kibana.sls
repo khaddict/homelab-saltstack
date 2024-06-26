@@ -1,3 +1,9 @@
+{% set xpack_encryptedSavedObjects_encryptionKey = salt['vault'].read_secret('kv/elk').xpack_encryptedSavedObjects_encryptionKey %}
+{% set xpack_reporting_encryptionKey = salt['vault'].read_secret('kv/elk').xpack_reporting_encryptionKey %}
+{% set xpack_security_encryptionKey = salt['vault'].read_secret('kv/elk').xpack_security_encryptionKey %}
+{% set elasticsearch_serviceAccountToken = salt['vault'].read_secret('kv/elk').elasticsearch_serviceAccountToken %}
+{% set ca_trusted_fingerprint = salt['vault'].read_secret('kv/elk').ca_trusted_fingerprint %}
+
 install_kibana:
   pkg.installed:
     - name: kibana
@@ -9,6 +15,13 @@ kibana_config:
     - mode: 660
     - user: root
     - group: kibana
+    - template: jinja
+    - context:
+        xpack_encryptedSavedObjects_encryptionKey: {{ xpack_encryptedSavedObjects_encryptionKey }}
+        xpack_reporting_encryptionKey: {{ xpack_reporting_encryptionKey }}
+        xpack_security_encryptionKey: {{ xpack_security_encryptionKey }}
+        elasticsearch_serviceAccountToken: {{ elasticsearch_serviceAccountToken }}
+        ca_trusted_fingerprint: {{ ca_trusted_fingerprint }}
 
 service_kibana:
   service.running:

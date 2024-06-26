@@ -182,3 +182,14 @@ pid.file: /run/kibana/kibana.pid
 # Maximum number of documents loaded by each shard to generate autocomplete suggestions.
 # This value must be a whole number greater than zero. Defaults to 100_000
 #unifiedSearch.autocomplete.valueSuggestions.terminateAfter: 100000
+xpack.encryptedSavedObjects.encryptionKey: {{ xpack_encryptedSavedObjects_encryptionKey }}
+xpack.reporting.encryptionKey: {{ xpack_reporting_encryptionKey }}
+xpack.security.encryptionKey: {{ xpack_security_encryptionKey }}
+csp.strict: false
+
+
+# This section was automatically generated during setup.
+elasticsearch.hosts: ['https://192.168.0.220:9200']
+elasticsearch.serviceAccountToken: {{ elasticsearch_serviceAccountToken }}
+elasticsearch.ssl.certificateAuthorities: [/var/lib/kibana/ca_1719397601253.crt]
+xpack.fleet.outputs: [{id: fleet-default-output, name: default, is_default: true, is_default_monitoring: true, type: elasticsearch, hosts: ['https://192.168.0.220:9200'], ca_trusted_fingerprint: {{ ca_trusted_fingerprint }}}]
