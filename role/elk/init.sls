@@ -21,3 +21,20 @@ elk_repo_pkg:
 install_elk:
   pkg.installed:
     - name: elasticsearch
+
+elasticsearch_config:
+  file.managed:
+    - name: /etc/elasticsearch/elasticsearch.yml
+    - source: salt://role/elk/files/elasticsearch.yml
+    - mode: 770
+    - user: root
+    - group: elasticsearch
+
+service_elasticsearch:
+  service.running:
+    - name: elasticsearch
+    - enable: True
+    - require:
+      - pkg: install_elk
+    - watch:
+      - file: elasticsearch_config
