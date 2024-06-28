@@ -22,21 +22,21 @@ install_elasticsearch:
   pkg.installed:
     - name: elasticsearch
 
-elasticsearch_config:
-  file.managed:
-    - name: /etc/elasticsearch/elasticsearch.yml
-    - source: salt://role/elk/files/elasticsearch.yml
-    - mode: 660
-    - user: root
-    - group: elasticsearch
+#elasticsearch_config:
+#  file.managed:
+#    - name: /etc/elasticsearch/elasticsearch.yml
+#    - source: salt://role/elk/files/elasticsearch.yml
+#    - mode: 660
+#    - user: root
+#    - group: elasticsearch
 
-jvm_heap_options:
-  file.managed:
-    - name: /etc/elasticsearch/jvm.options.d/jvm-heap.options
-    - source: salt://role/elk/files/jvm-heap.options
-    - mode: 644
-    - user: root
-    - group: elasticsearch
+#jvm_heap_options:
+#  file.managed:
+#    - name: /etc/elasticsearch/jvm.options.d/jvm-heap.options
+#    - source: salt://role/elk/files/jvm-heap.options
+#    - mode: 644
+#    - user: root
+#    - group: elasticsearch
 
 service_elasticsearch:
   service.running:
