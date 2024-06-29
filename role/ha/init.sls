@@ -1,6 +1,7 @@
 {% set fqdn = grains["fqdn"] %}
 {% set ha_iface = 'enp0s11' %}
 {% set vip = '192.168.0.214' %}
+{% set host = grains["host"] %}
 
 include:
   - base.haproxy
@@ -13,6 +14,9 @@ haproxy_config:
     - mode: 644
     - user: root
     - group: root
+    - template: jinja
+    - context:
+        host: {{ host }}
 
 restart_haproxy_service:
   service.running:
