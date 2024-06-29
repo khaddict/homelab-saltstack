@@ -21,4 +21,3 @@ tasks:
       - when: <% failed() %>
         publish:
           - msg: "Could not view certificate for <% ctx().vm_name %>.<% ctx().domain %>"
-

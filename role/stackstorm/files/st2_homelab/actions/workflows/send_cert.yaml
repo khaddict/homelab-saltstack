@@ -1,0 +1,31 @@
+version: 1.0
+description: Send certificate + key to the server.
+
+input:
+  - vm_name
+
+vars:
+  - domain: "homelab.lan"
+  - ca_vm: "ca.<% ctx().domain %>"
+  - ca_file_name: "ca-homelab"
+  - ca_path: "/root/ca/"
+  - vm_path: "/root/servers/<% ctx().vm_name %>.<% ctx().domain %>/"
+
+tasks:
+  copy_certificate_key:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        scp -r -O <% ctx().vm_path %> root@<% ctx().vm_name %>.<% ctx().domain %>:/tmp
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - msg: "<% ctx().vm_name %>.<% ctx().domain %> certificate + key copied to /tmp."
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not copy <% ctx().vm_name %>.<% ctx().domain %>."
+
+output:
+  - msg: <% ctx().msg %>
