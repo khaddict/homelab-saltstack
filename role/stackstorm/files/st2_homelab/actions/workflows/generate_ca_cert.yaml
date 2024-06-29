@@ -8,21 +8,36 @@ vars:
   - domain: "homelab.lan"
   - ca_vm: "ca.<% ctx().domain %>"
   - ca_file_name: "ca-homelab"
+  - ca_path: "/root/ca/"
 
 tasks:
+  create_ca_path:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        mkdir -p <% ctx().ca_path %>
+    next:
+      - when: <% succeeded() %>
+        do: generate_key
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not create <% ctx().ca_path %>."
+
   generate_key:
     action: core.remote
     input:
       hosts: "<% ctx().ca_vm %>"
       username: root
       cmd: |
-        openssl genrsa -des3 -passout pass:<% ctx().ca_password %> -out /root/<% ctx().ca_file_name %>.key 2048
+        openssl genrsa -des3 -passout pass:<% ctx().ca_password %> -out <% ctx().ca_path %><% ctx().ca_file_name %>.key 2048
     next:
       - when: <% succeeded() %>
         do: generate_pem
       - when: <% failed() %>
         publish:
-          - msg: "Could not generate <% ctx().ca_file_name %>.key"
+          - msg: "Could not generate <% ctx().ca_path %><% ctx().ca_file_name %>.key"
 
   generate_pem:
     action: core.remote
@@ -30,13 +45,13 @@ tasks:
       hosts: "<% ctx().ca_vm %>"
       username: root
       cmd: |
-        openssl req -x509 -new -nodes -key /root/<% ctx().ca_file_name %>.key -sha256 -days 1095 -out /root/<% ctx().ca_file_name %>.pem -subj "/C=FR/ST=Ile-de-France/L=Paris/O=Homelab/CN=Homelab CA" -passin pass:<% ctx().ca_password %>
+        openssl req -x509 -new -nodes -key <% ctx().ca_path %><% ctx().ca_file_name %>.key -sha256 -days 1095 -out <% ctx().ca_path %><% ctx().ca_file_name %>.pem -subj "/C=FR/ST=Ile-de-France/L=Paris/O=Homelab/CN=Homelab CA" -passin pass:<% ctx().ca_password %>
     next:
       - when: <% succeeded() %>
         do: generate_crt
       - when: <% failed() %>
         publish:
-          - msg: "Could not generate <% ctx().ca_file_name %>.pem"
+          - msg: "Could not generate <% ctx().ca_path %><% ctx().ca_file_name %>.pem"
 
   generate_crt:
     action: core.remote
@@ -44,14 +59,14 @@ tasks:
       hosts: "<% ctx().ca_vm %>"
       username: root
       cmd: |
-        openssl x509 -in /root/<% ctx().ca_file_name %>.pem -inform PEM -out /root/<% ctx().ca_file_name %>.crt
+        openssl x509 -in <% ctx().ca_path %><% ctx().ca_file_name %>.pem -inform PEM -out <% ctx().ca_path %><% ctx().ca_file_name %>.crt
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().ca_file_name %>.[crt|key|pem] generated."
+          - msg: "<% ctx().ca_path %><% ctx().ca_file_name %>.[crt|key|pem] generated."
       - when: <% failed() %>
         publish:
-          - msg: "Could not generate <% ctx().ca_file_name %>.crt"
+          - msg: "Could not generate <% ctx().ca_path %><% ctx().ca_file_name %>.crt"
 
 output:
   - msg: <% ctx().msg %>
