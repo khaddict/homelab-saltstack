@@ -13,6 +13,7 @@ st2_homelab_configs:
     - mode: 640
     - user: root
     - group: root
+    - template: jinja
     - context:
         ca_password: {{ ca_password }}
 
