@@ -18,7 +18,8 @@ tasks:
       hosts: "<% ctx().ca_vm %>"
       username: root
       cmd: |
-        scp -r -O <% ctx().vm_path %> root@<% ctx().vm_name %>.<% ctx().domain %>:/tmp
+        scp -O <% ctx().vm_path %><% ctx().vm_name %>.<% ctx().domain %>.crt root@<% ctx().vm_name %>.<% ctx().domain %>:/etc/ssl/certs
+        scp -O <% ctx().vm_path %><% ctx().vm_name %>.<% ctx().domain %>.key root@<% ctx().vm_name %>.<% ctx().domain %>:/etc/ssl/private
     next:
       - when: <% succeeded() %>
         publish:
