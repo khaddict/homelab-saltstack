@@ -1,5 +1,5 @@
 version: 1.0
-description: Generate certificate (.pem, .crt, .key, .csr) for a VM.
+description: Generate certificate (.crt, .csr, .key, .pem) for a VM.
 
 input:
   - vm_name
@@ -63,7 +63,7 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.[key|csr|pem|crt] generated."
+          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.[crt|csr|key|pem] generated."
       - when: <% failed() %>
         publish:
           - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.crt"

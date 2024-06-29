@@ -1,0 +1,24 @@
+version: 1.0
+description: View certificate (.crt, .pem).
+
+input:
+  - vm_name
+  - cert_extension
+
+vars:
+  - domain: "homelab.lan"
+  - ca_vm: "ca.<% ctx().domain %>"
+
+tasks:
+  view_certificate:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        openssl x509 -in /root/<% ctx().vm_name %>.<% ctx().domain %>.<% ctx().cert_extension %> -text -noout
+    next:
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not view certificate for <% ctx().vm_name %>.<% ctx().domain %>"
+

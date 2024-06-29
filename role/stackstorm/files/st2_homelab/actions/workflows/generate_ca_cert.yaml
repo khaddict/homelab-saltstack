@@ -1,5 +1,5 @@
 version: 1.0
-description: Generate CA certificate (.pem, .crt, .key, .srl).
+description: Generate CA certificate (.crt, .key, .pem).
 
 input:
   - ca_password
@@ -48,7 +48,7 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().ca_file_name %>.[key|crt|pem|srl] generated."
+          - msg: "<% ctx().ca_file_name %>.[crt|key|pem] generated."
       - when: <% failed() %>
         publish:
           - msg: "Could not generate <% ctx().ca_file_name %>.crt"
