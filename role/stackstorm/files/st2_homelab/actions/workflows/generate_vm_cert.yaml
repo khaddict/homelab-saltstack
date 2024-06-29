@@ -63,10 +63,10 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.[key|csr|pem] generated."
+          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.[key|csr|pem|crt] generated."
       - when: <% failed() %>
         publish:
-          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.pem"
+          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.crt"
 
 output:
   - msg: <% ctx().msg %>

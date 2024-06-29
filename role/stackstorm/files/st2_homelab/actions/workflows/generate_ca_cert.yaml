@@ -1,10 +1,11 @@
 version: 1.0
-description: Generate CA certificate (.pem, .crt, .key, .csr).
+description: Generate CA certificate (.pem, .crt, .key, .srl).
 
 input:
   - ca_password
 
 vars:
+  - domain: "homelab.lan"
   - ca_vm: "ca.<% ctx().domain %>"
   - ca_file_name: "ca-homelab"
 
@@ -47,7 +48,7 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().ca_file_name %>.[key|csr|pem] generated."
+          - msg: "<% ctx().ca_file_name %>.[key|crt|pem|srl] generated."
       - when: <% failed() %>
         publish:
           - msg: "Could not generate <% ctx().ca_file_name %>.crt"
