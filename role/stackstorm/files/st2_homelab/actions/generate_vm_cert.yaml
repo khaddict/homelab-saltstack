@@ -13,5 +13,5 @@ parameters:
   ca_password:
     required: true
     type: string
-    default: {{ config_context.ca_password }}
+    default: "{{ config_context.ca_password }}"
     description: CA password.
