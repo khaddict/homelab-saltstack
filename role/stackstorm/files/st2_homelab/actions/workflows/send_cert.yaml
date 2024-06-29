@@ -23,10 +23,10 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish:
-          - msg: "<% ctx().vm_name %>.<% ctx().domain %> certificate + key copied to /tmp."
+          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.crt copied to /etc/ssl/certs & <% ctx().vm_name %>.<% ctx().domain %>.key copied to /etc/ssl/private."
       - when: <% failed() %>
         publish:
-          - msg: "Could not copy <% ctx().vm_name %>.<% ctx().domain %>."
+          - msg: "Could not copy <% ctx().vm_name %>.<% ctx().domain %>.[crt|key]"
 
 output:
   - msg: <% ctx().msg %>
