@@ -10,7 +10,7 @@ vars:
   - ca_vm: "ca.<% ctx().domain %>"
   - ca_file_name: "ca-homelab"
   - ca_path: "/root/ca/"
-  - vm_path: "/root/<% ctx().vm_name %>.<% ctx().domain %>/"
+  - vm_path: "/root/servers/<% ctx().vm_name %>.<% ctx().domain %>/"
 
 tasks:
   create_vm_path:
