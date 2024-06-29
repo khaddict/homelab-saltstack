@@ -1,0 +1,72 @@
+version: 1.0
+description: Generate certificate (.pem, .crt, .key, .csr) for a VM.
+
+input:
+  - vm_name
+  - ca_password
+
+vars:
+  - domain: "homelab.lan"
+  - ca_vm: "ca.<% ctx().domain %>"
+  - ca_file_name: "ca-homelab"
+
+tasks:
+  generate_key:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        openssl genrsa -out /root/<% ctx().vm_name %>.<% ctx().domain %>.key 2048
+    next:
+      - when: <% succeeded() %>
+        do: generate_csr
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.key"
+
+  generate_csr:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        openssl req -new -key /root/<% ctx().vm_name %>.<% ctx().domain %>.key -out /root/<% ctx().vm_name %>.<% ctx().domain %>.csr -subj "/C=FR/ST=Ile-de-France/L=Paris/O=Homelab/CN=<% ctx().vm_name %>.<% ctx().domain %>"
+    next:
+      - when: <% succeeded() %>
+        do: generate_pem
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.csr"
+
+  generate_pem:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        openssl x509 -req -sha256 -days 365 -in /root/<% ctx().vm_name %>.<% ctx().domain %>.csr -signkey /root/<% ctx().vm_name %>.<% ctx().domain %>.key -out /root/<% ctx().vm_name %>.<% ctx().domain %>.pem
+    next:
+      - when: <% succeeded() %>
+        do: generate_crt
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.pem"
+
+  generate_crt:
+    action: core.remote
+    input:
+      hosts: "<% ctx().ca_vm %>"
+      username: root
+      cmd: |
+        openssl x509 -req -in /root/<% ctx().vm_name %>.<% ctx().domain %>.csr -CA /root/<% ctx().ca_file_name %>.pem -CAkey /root/<% ctx().ca_file_name %>.key -CAcreateserial -out /root/<% ctx().vm_name %>.<% ctx().domain %>.crt -days 10000 -sha256 -passin pass:<% ctx().ca_password %>
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - msg: "<% ctx().vm_name %>.<% ctx().domain %>.[key|csr|pem]"
+      - when: <% failed() %>
+        publish:
+          - msg: "Could not generate <% ctx().vm_name %>.<% ctx().domain %>.pem"
+
+output:
+  - msg: <% ctx().msg %>

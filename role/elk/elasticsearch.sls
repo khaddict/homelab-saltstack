@@ -44,5 +44,5 @@ service_elasticsearch:
     - enable: True
     - require:
       - pkg: install_elasticsearch
-    - watch:
-      - file: elasticsearch_config
+#    - watch:
+#      - file: elasticsearch_config

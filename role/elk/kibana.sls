@@ -29,5 +29,5 @@ service_kibana:
     - enable: True
     - require:
       - pkg: install_kibana
-    - watch:
-      - file: kibana_config
+#    - watch:
+#      - file: kibana_config
