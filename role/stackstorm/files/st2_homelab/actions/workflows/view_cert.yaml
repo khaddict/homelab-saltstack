@@ -8,6 +8,7 @@ input:
 vars:
   - domain: "homelab.lan"
   - ca_vm: "ca.<% ctx().domain %>"
+  - vm_path: "/root/servers/<% ctx().vm_name %>.<% ctx().domain %>/"
 
 tasks:
   view_certificate:
@@ -16,7 +17,7 @@ tasks:
       hosts: "<% ctx().ca_vm %>"
       username: root
       cmd: |
-        openssl x509 -in /root/<% ctx().vm_name %>.<% ctx().domain %>.<% ctx().cert_extension %> -text -noout
+        openssl x509 -in <% ctx().vm_path %><% ctx().vm_name %>.<% ctx().domain %>.<% ctx().cert_extension %> -text -noout
     next:
       - when: <% failed() %>
         publish:
