@@ -10,9 +10,9 @@ st2_homelab_configs:
   file.managed:
     - name: /opt/stackstorm/configs/st2_homelab.yaml
     - source: salt://role/stackstorm/files/st2_homelab.yaml
-    - mode: 640
+    - mode: 660
     - user: root
-    - group: root
+    - group: st2packs
     - template: jinja
     - context:
         ca_password: {{ ca_password }}
