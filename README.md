@@ -28,15 +28,15 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `grafana.homelab.lan` : machine Grafana
 - ✅ `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 - ✅ `ntp.homelab.lan` : machine NTP → chrony
+- ✅ `log.homelab.lan` : machine rsyslog
+- ✅ `elk.homelab.lan` : machine ELK
 
 ### En cours
 
-- `elk.homelab.lan` : machine ELK
-
-### Ne pas oublier de faire
-
+- Remettre un peu salt au propre
+- Automatiser la création d'une VM + création côté NetBox
 - Mettre tous mes services en HTTPS
-- Automatiser l'envoi des certs vers Vault
+- Automatiser l'envoi des certs vers Vault (+ mettre les existants)
 - Intégration Vault / Saltstack obsolète, besoin de changer
 - Gérer quelle machine peut se connecter à laquelle (actuellement openbar)
 
