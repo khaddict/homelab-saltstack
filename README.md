@@ -27,10 +27,10 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting (redirections vers Discord)
 - ✅ `grafana.homelab.lan` : machine Grafana
 - ✅ `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
+- ✅ `ntp.homelab.lan` : machine NTP → chrony
 
 ### En cours
 
-- `ntp.homelab.lan` : machine NTP → chrony
 - `elk.homelab.lan` : machine ELK
 
 ### Ne pas oublier de faire
