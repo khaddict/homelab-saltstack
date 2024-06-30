@@ -48,3 +48,6 @@ base:
 
   'elk.homelab.lan':
     - role.elk
+
+  'log.homelab.lan':
+    - role.log
