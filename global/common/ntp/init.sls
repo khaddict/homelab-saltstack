@@ -20,7 +20,6 @@ enable_service_chrony_client:
   service.running:
     - name: chrony
     - enable: True
-    - reload: True
 {% if grains["fqdn"] != "ntp.homelab.lan" %}
     - watch:
       - file: chrony_client_config

@@ -10,6 +10,5 @@ enable_service_chrony_server:
   service.running:
     - name: chrony
     - enable: True
-    - reload: True
     - watch:
       - file: chrony_server_config
