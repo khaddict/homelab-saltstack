@@ -10,4 +10,5 @@ include:
   - .resolv
   - .network
   - .ca
+  - .ntp
   - base.node_exporter

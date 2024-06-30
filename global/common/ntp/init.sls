@@ -16,7 +16,7 @@ chrony_client_config:
     - group: root
 {% endif %}
 
-enable_service_chrony:
+enable_service_chrony_client:
   service.running:
     - name: chrony
     - enable: True

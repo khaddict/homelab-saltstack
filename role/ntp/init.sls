@@ -6,7 +6,7 @@ chrony_server_config:
     - user: root
     - group: root
 
-enable_service_chrony:
+enable_service_chrony_server:
   service.running:
     - name: chrony
     - enable: True
