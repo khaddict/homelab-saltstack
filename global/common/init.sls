@@ -11,4 +11,5 @@ include:
   - .network
   - .ca
   - .ntp
+  - .log
   - base.node_exporter
