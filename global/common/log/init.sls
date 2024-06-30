@@ -1,7 +1,7 @@
 include:
   - base.rsyslog
 
-{% if grains["fqdn"] != "log.homelab.lan" %}
+{% if grains["fqdn"] not in ["log.homelab.lan", "elk.homelab.lan"] %}
 rsyslog_client_config:
   file.managed:
     - name: /etc/rsyslog.conf
@@ -15,7 +15,7 @@ enable_service_rsyslog_client:
   service.running:
     - name: rsyslog
     - enable: True
-{% if grains["fqdn"] != "log.homelab.lan" %}
+{% if grains["fqdn"] not in ["log.homelab.lan", "elk.homelab.lan"] %}
     - watch:
       - file: rsyslog_client_config
 {% endif %}
