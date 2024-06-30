@@ -1,7 +1,7 @@
 chrony_server_config:
   file.managed:
     - name: /etc/chrony/chrony.conf
-    - source: salt://global/role/ntp/files/chrony.conf
+    - source: salt://role/ntp/files/chrony.conf
     - mode: 644
     - user: root
     - group: root
