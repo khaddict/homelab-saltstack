@@ -26,15 +26,23 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `ldap.homelab.lan` : machine LDAP + PHPLDAPAdmin
 - ✅ `prometheus.homelab.lan` : machine Prometheus x alertmanager pour la partie monitoring & alerting (redirections vers Discord)
 - ✅ `grafana.homelab.lan` : machine Grafana
+- ✅ `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 
 ### En cours
 
 - `ntp.homelab.lan` : machine NTP → chrony
-- `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
-- `pfsense.homelab.lan` : PfSense pour gérer la partie firewall
+- `elk.homelab.lan` : machine ELK
+
+### Ne pas oublier de faire
+
+- Mettre tous mes services en HTTPS
+- Automatiser l'envoi des certs vers Vault
+- Intégration Vault / Saltstack obsolète, besoin de changer
+- Gérer quelle machine peut se connecter à laquelle (actuellement openbar)
 
 ### Après
 
+- `pfsense.homelab.lan` : PfSense pour gérer la partie firewall
 - `smtp.homelab.lan` : machine SMTP
 - `cloud.homelab.lan` : mettre en place une partie cloud pour apprendre des solutions comme Kubernetes, Docker
 - `ansible.homelab.lan` : mettre en place une partie de l'automatisation avec Ansible pour apprendre les basiques
