@@ -1,7 +1,7 @@
 rsyslog_server_config:
   file.managed:
     - name: /etc/rsyslog.conf
-    - source: salt://role/log/files/rsyslog.conf
+    - source: salt://role/elk/files/rsyslog.conf
     - mode: 644
     - user: root
     - group: root
