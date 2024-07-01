@@ -5,7 +5,7 @@ include:
 rsyslog_client_config:
   file.managed:
     - name: /etc/rsyslog.conf
-    - source: salt://global/common/log/files/rsyslog.conf
+    - source: salt://global/common/rsyslog/files/rsyslog.conf
     - mode: 644
     - user: root
     - group: root
