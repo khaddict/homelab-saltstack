@@ -28,8 +28,7 @@ L'objectif de ce projet, c'est de me faire un p'tit homelab pour tester plein de
 - ✅ `grafana.homelab.lan` : machine Grafana
 - ✅ `ca.homelab.lan` : machine CA qui gère les certificats SSL via openSSL
 - ✅ `ntp.homelab.lan` : machine NTP → chrony
-- ✅ `log.homelab.lan` : machine rsyslog
-- ✅ `elk.homelab.lan` : machine ELK
+- ✅ `elk.homelab.lan` : machine ELK + rsyslog
 
 ### En cours
 

@@ -1,15 +1,13 @@
-{% import_yaml 'data/network_confs.yaml' as network_confs %}
-{% set fqdn = grains["fqdn"] %}
-
 include:
-  - .packages
-  - .salt-minion
-  - .ssh
-  - .bashrc
-  - .hosts
-  - .resolv
-  - .network
-  - .ca
-  - .ntp
-  - .log
   - base.node_exporter
+  - .bashrc
+  - .ca
+  - .hosts
+  - .network
+  - .ntp
+  - .packages
+  - .resolv
+  - .rsyslog
+  - .salt-minion
+  - .sources
+  - .ssh
