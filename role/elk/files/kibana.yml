@@ -185,3 +185,4 @@ pid.file: /run/kibana/kibana.pid
 xpack.encryptedSavedObjects.encryptionKey: {{ xpack_encryptedSavedObjects_encryptionKey }}
 xpack.reporting.encryptionKey: {{ xpack_reporting_encryptionKey }}
 xpack.security.encryptionKey: {{ xpack_security_encryptionKey }}
+csp.strict: false
